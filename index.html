@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathReps | Master the Basics</title>
+    <style>
+        /* CSS Variables with the new logo palette */
+        :root {
+            --color-start: #89d957;
+            --color-end: #c9e265;
+            --primary-gradient: linear-gradient(135deg, var(--color-start), var(--color-end));
+            
+            /* Clean White Theme */
+            --bg-color: #FAFAFA; 
+            --card-bg: #FFFFFF;
+            --text-main: #333333; 
+            --text-muted: #6B7280;
+            --border-color: #E5E7EB;
+        }
+
+        /* Basic Reset & Typography */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Layout */
+        header {
+            background-color: var(--card-bg);
+            padding: 3rem 1rem 2rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .site-logo {
+            max-width: 350px; /* Adjust this value if you want the logo larger or smaller */
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Search Bar */
+        .search-container {
+            margin-bottom: 2.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        #searchInput {
+            width: 100%;
+            max-width: 450px;
+            padding: 0.85rem 1.2rem;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 50px; 
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: var(--card-bg);
+        }
+
+        #searchInput:focus {
+            border-color: var(--color-start);
+            box-shadow: 0 0 0 4px rgba(137, 217, 87, 0.15); 
+        }
+
+        /* Grid & Cards */
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .module-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Accent top border for cards */
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-start);
+            box-shadow: 0 12px 20px -5px rgba(137, 217, 87, 0.1), 0 8px 10px -6px rgba(137, 217, 87, 0.05);
+        }
+
+        .module-card:hover::before {
+            opacity: 1;
+        }
+
+        .module-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .module-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .module-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        /* Coming Soon Card Style */
+        .module-card.coming-soon {
+            background-color: transparent;
+            border: 2px dashed var(--border-color);
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .module-card.coming-soon::before {
+            display: none;
+        }
+
+        .module-card.coming-soon:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: var(--border-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+        }
+
+        /* Hidden class for JS filtering */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- Replaced the H1 with your custom SVG logo -->
+        <img src="/assets/mathreps-logo.svg" alt="MathReps Logo" class="site-logo">
+        <p class="subtitle">Train your brain. Master the basics through spaced repetition.</p>
+    </header>
+
+    <main class="container">
+        
+        <!-- Search Filter -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search modules (e.g., permutation)...">
+        </div>
+
+        <!-- Modules Grid -->
+        <div class="module-grid" id="moduleGrid">
+            
+            <!-- Combination Module -->
+            <a href="https://mathreps.jomontolalu.com/combination" class="module-card">
+                <div class="module-icon">🔢</div>
+                <h2 class="module-title">Combination</h2>
+                <p class="module-desc">Practice nCr. Select items from a collection where the order does NOT matter.</p>
+            </a>
+
+            <!-- Permutation Module -->
+            <a href="https://mathreps.jomontolalu.com/permutation" class="module-card">
+                <div class="module-icon">🔢</div>
+                <h2 class="module-title">Permutation</h2>
+                <p class="module-desc">Practice nPr. Arrange items from a collection where the order DOES matter.</p>
+            </a>
+
+            <!-- Placeholder for future modules -->
+            <div class="module-card coming-soon">
+                <div class="module-icon">⏳</div>
+                <h2 class="module-title">More Coming Soon</h2>
+                <p class="module-desc">New repetition modules are currently being developed.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> MathReps by Jonathan Montolalu. Built for learning.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Search Filter Logic
+        const searchInput = document.getElementById('searchInput');
+        const cards = document.querySelectorAll('.module-card:not(.coming-soon)');
+
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+
+            cards.forEach(card => {
+                const title = card.querySelector('.module-title').textContent.toLowerCase();
+                const desc = card.querySelector('.module-desc').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
