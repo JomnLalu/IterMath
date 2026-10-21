@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greatest Common Divisor Practice | IterMath</title>
+    <meta name="description" content="Practice finding the greatest common divisor with a step-by-step solution on every miss.">
+    <link rel="canonical" href="https://itermath.jomontolalu.com/gcd/">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="IterMath">
+    <meta property="og:title" content="Greatest Common Divisor Practice | IterMath">
+    <meta property="og:description" content="Practice finding the greatest common divisor with a step-by-step solution on every miss.">
+    <meta property="og:url" content="https://itermath.jomontolalu.com/gcd/">
+    <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="/assets/style.css">
+    <script>
+        // Reveal questions only after MathJax has typeset them
+        window.MathJax = {
+            startup: {
+                pageReady: () => MathJax.startup.defaultPageReady().then(() => document.documentElement.classList.add('math-ready'))
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" onerror="document.documentElement.classList.add('math-ready')"></script>
+</head>
+<body>
+
+<main class="exercise">
+    <a href="/" class="exercise-logo" aria-label="IterMath home">
+        <img src="/assets/itermath-logo.svg" alt="IterMath" width="160" height="57">
+    </a>
+
+    <h1>Greatest Common Divisor</h1>
+    <div id="question-container" class="math-q"></div>
+    
+    <div class="input-group">
+        <label for="answer-input" class="visually-hidden">Your answer</label>
+        <input type="number" id="answer-input" class="input" placeholder="Answer" autocomplete="off" inputmode="numeric" />
+        <button id="submit-btn" class="button" onclick="checkAnswer()">Submit</button>
+    </div>
+    
+    <div id="feedback-container" class="feedback" aria-live="polite"></div>
+    <button id="next-btn" class="button button-secondary" onclick="generateQuestion()" style="display:none;">Next Question</button>
+
+    <a href="/" class="back-link">&larr; All modules</a>
+</main>
+
+<script>
+    let currentAns, currentSteps;
+
+    function rnd(a, b) {
+        return Math.floor(Math.random() * (b - a + 1)) + a;
+    }
+
+    function gcd(a, b) {
+        return b === 0 ? a : gcd(b, a % b);
+    }
+
+    // Initialize and generate the first question
+    function generateQuestion() {
+        // Reset UI state
+        document.getElementById('feedback-container').innerHTML = '';
+        const input = document.getElementById('answer-input');
+        input.value = '';
+        input.disabled = false;
+        document.getElementById('submit-btn').style.display = 'inline-block';
+        document.getElementById('next-btn').style.display = 'none';
+
+        // Focus the input field automatically
+        input.focus();
+
+        let q, ans, s;
+        const g = rnd(2, 12); let x = rnd(2, 9), y = rnd(2, 9); while (gcd(x, y) !== 1) { x = rnd(2, 9); y = rnd(2, 9); } const A = g*x, B = g*y; ans = g; q = `\\gcd(${A}, ${B}) = \\text{?}`; s = [`${A} &= ${g} \\times ${x}`, `${B} &= ${g} \\times ${y}`, `\\gcd(${A}, ${B}) &= \\mathbf{${g}}`];
+        currentAns = ans;
+        currentSteps = s;
+
+        document.getElementById('question-container').innerHTML = `$$ ${q} $$`;
+
+        // Re-render MathJax
+        if (window.MathJax && MathJax.typesetPromise) {
+            MathJax.typesetPromise();
+        }
+    }
+
+    // Check user input against the calculated answer
+    function checkAnswer() {
+        const inputElement = document.getElementById('answer-input');
+        const userAns = parseInt(inputElement.value);
+        const feedback = document.getElementById('feedback-container');
+
+        // Input validation
+        if (isNaN(userAns)) {
+            feedback.innerHTML = `<p class="hint">Enter a number to check your answer.</p>`;
+            inputElement.focus();
+            return;
+        }
+
+        // Disable input and hide submit button to prevent double submissions
+        inputElement.disabled = true;
+        document.getElementById('submit-btn').style.display = 'none';
+
+        if (userAns === currentAns) {
+            // Correct Answer Sequence
+            feedback.innerHTML = `
+                <div class="correct">
+                    Correct!
+                    <span class="feedback-note">Loading next question...</span>
+                </div>`;
+
+            // Wait 3 seconds, then automatically generate the next question
+            setTimeout(generateQuestion, 3000);
+
+        } else {
+            // Incorrect Answer Sequence
+            let steps = `<div class="incorrect-container">`;
+            steps += `<p class="incorrect-title">Incorrect. Here is the step-by-step solution:</p>`;
+            steps += `$$ \\begin{aligned} ` + currentSteps.join(` \\\\[8pt] `) + ` \\end{aligned} $$`;
+            steps += `</div>`;
+
+            feedback.innerHTML = steps;
+
+            // Show manual next button
+            document.getElementById('next-btn').style.display = 'inline-block';
+
+            // Re-render MathJax for the newly injected LaTeX
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise();
+            }
+        }
+    }
+
+    // Allow pressing "Enter" key inside the input field to trigger submission
+    document.getElementById('answer-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            checkAnswer();
+        }
+    });
+
+    // Run once on load
+    window.onload = generateQuestion;
+</script>
+
+</body>
+</html>
