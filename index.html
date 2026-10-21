@@ -3,295 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IterMath | Master the Basics</title>
-    <style>
-        /* CSS Variables with the new logo palette */
-        :root {
-            --color-start: #89d957;
-            --color-end: #c9e265;
-            --primary-gradient: linear-gradient(135deg, var(--color-start), var(--color-end));
-            
-            /* Clean White Theme */
-            --bg-color: #FAFAFA; 
-            --card-bg: #FFFFFF;
-            --text-main: #333333; 
-            --text-muted: #6B7280;
-            --border-color: #E5E7EB;
-        }
-
-        /* Basic Reset & Typography */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Layout */
-        header {
-            background-color: var(--card-bg);
-            padding: 3rem 1rem 2rem 1rem;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .site-logo {
-            max-width: 350px; /* Adjust this value if you want the logo larger or smaller */
-            width: 100%;
-            height: auto;
-            margin-bottom: 1rem;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-            flex: 1;
-            width: 100%;
-        }
-
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Search Bar */
-        .search-container {
-            margin-bottom: 2.5rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        #searchInput {
-            width: 100%;
-            max-width: 450px;
-            padding: 0.85rem 1.2rem;
-            font-size: 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 50px; 
-            outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            background-color: var(--card-bg);
-        }
-
-        #searchInput:focus {
-            border-color: var(--color-start);
-            box-shadow: 0 0 0 4px rgba(137, 217, 87, 0.15); 
-        }
-
-        /* Grid & Cards */
-        .module-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .module-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Accent top border for cards */
-        .module-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary-gradient);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .module-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--color-start);
-            box-shadow: 0 12px 20px -5px rgba(137, 217, 87, 0.1), 0 8px 10px -6px rgba(137, 217, 87, 0.05);
-        }
-
-        .module-card:hover::before {
-            opacity: 1;
-        }
-
-        .module-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .module-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-main);
-        }
-
-        .module-desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            flex-grow: 1;
-        }
-
-        /* Coming Soon Card Style */
-        .module-card.coming-soon {
-            background-color: transparent;
-            border: 2px dashed var(--border-color);
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        .module-card.coming-soon::before {
-            display: none;
-        }
-
-        .module-card.coming-soon:hover {
-            transform: none;
-            box-shadow: none;
-            border-color: var(--border-color);
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            border-top: 1px solid var(--border-color);
-            background-color: var(--card-bg);
-        }
-
-        /* Hidden class for JS filtering */
-        .hidden {
-            display: none;
-        }
-    </style>
+    <title>IterMath | Math Practice Drills</title>
+    <meta name="description" content="Free, repeatable drills for addition, subtraction, multiplication, division, mixed operations, combinations and permutations, with a worked solution for every miss.">
+    <link rel="canonical" href="https://itermath.jomontolalu.com/">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="IterMath">
+    <meta property="og:title" content="IterMath | Math Practice Drills">
+    <meta property="og:description" content="Repeatable drills for arithmetic, combinations and permutations, with a worked solution for every miss.">
+    <meta property="og:url" content="https://itermath.jomontolalu.com/">
+    <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
 
-    <header>
-        <!-- Replaced the H1 with your custom SVG logo -->
-        <img src="/assets/itermath-logo.svg" alt="IterMath Logo" class="site-logo">
-        <p class="subtitle">Train your brain. Master the basics through spaced repetition.</p>
-    </header>
+    <main class="home">
+        <header class="home-header">
+            <h1 class="visually-hidden">IterMath</h1>
+            <img src="/assets/itermath-logo.svg" alt="IterMath" class="home-logo" width="240" height="85">
+            <p class="home-intro">Pick a topic and answer one question at a time. Miss one and you get the worked solution before moving on.</p>
+        </header>
 
-    <main class="container">
-        
-        <!-- Search Filter -->
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search modules (e.g., permutation)...">
-        </div>
+        <label for="searchInput" class="visually-hidden">Search modules</label>
+        <input type="search" id="searchInput" class="input search" placeholder="Search modules" autocomplete="off">
 
-        <!-- Modules Grid -->
         <div class="module-grid" id="moduleGrid">
-            
-            <!-- Add Module -->
-            <a href="https://itermath.jomontolalu.com/addition" class="module-card">
-                <div class="module-icon">➕</div>
+
+            <a href="/addition/" class="module-card">
+                <span class="module-symbol" aria-hidden="true">+</span>
                 <h2 class="module-title">Addition</h2>
-                <p class="module-desc">Practice addition. Combine two quantities together to find the total sum.</p>
+                <p class="module-desc">Add two 2-digit numbers.</p>
             </a>
 
-            <!-- Sub Module -->
-            <a href="https://itermath.jomontolalu.com/subtraction" class="module-card">
-                <div class="module-icon">➖</div>
+            <a href="/subtraction/" class="module-card">
+                <span class="module-symbol" aria-hidden="true">&minus;</span>
                 <h2 class="module-title">Subtraction</h2>
-                <p class="module-desc">Practice subtraction. Find the difference between numbers or determine what remains after taking a quantity away.</p>
+                <p class="module-desc">Subtract two 2-digit numbers. Answers are never negative.</p>
             </a>
 
-            <!-- Mul Module -->
-            <a href="https://itermath.jomontolalu.com/multiplication" class="module-card">
-                <div class="module-icon">✖️</div>
+            <a href="/multiplication/" class="module-card">
+                <span class="module-symbol" aria-hidden="true">&times;</span>
                 <h2 class="module-title">Multiplication</h2>
-                <p class="module-desc">Practice multiplication. Calculate the total amount when you rapidly combine multiple, equal-sized groups.</p>
+                <p class="module-desc">Times tables from 2 to 12.</p>
             </a>
 
-            <!-- Div Module -->
-            <a href="https://itermath.jomontolalu.com/division" class="module-card">
-                <div class="module-icon">➗</div>
+            <a href="/division/" class="module-card">
+                <span class="module-symbol" aria-hidden="true">&divide;</span>
                 <h2 class="module-title">Division</h2>
-                <p class="module-desc">Practice division. Split a total quantity evenly into smaller groups or see how many times one number fits into another.</p>
+                <p class="module-desc">Divide by 2 to 12. Every answer is a whole number.</p>
             </a>
 
-            <!-- Arithmetics Module -->
-            <a href="https://itermath.jomontolalu.com/arithmetics" class="module-card">
-                <div class="module-icon">🟰</div>
-                <h2 class="module-title">Arithmetics (MIX)</h2>
-                <p class="module-desc">Practice mixed operations. Solve multi-step problems by applying different mathematical rules in the correct sequence.</p>
+            <a href="/arithmetics/" class="module-card">
+                <span class="module-symbol" aria-hidden="true">( )</span>
+                <h2 class="module-title">Mixed Operations</h2>
+                <p class="module-desc">Multi-step expressions that test order of operations.</p>
             </a>
 
-            <!-- Combination Module -->
-            <a href="https://itermath.jomontolalu.com/combination" class="module-card">
-                <div class="module-icon">🔢</div>
+            <a href="/combination/" class="module-card">
+                <span class="module-symbol" aria-hidden="true">nCr</span>
                 <h2 class="module-title">Combination</h2>
-                <p class="module-desc">Practice nCr. Select items from a collection where the order does NOT matter.</p>
+                <p class="module-desc">Choose k items from n when order does not matter.</p>
             </a>
 
-            <!-- Permutation Module -->
-            <a href="https://itermath.jomontolalu.com/permutation" class="module-card">
-                <div class="module-icon">🔢</div>
+            <a href="/permutation/" class="module-card">
+                <span class="module-symbol" aria-hidden="true">nPr</span>
                 <h2 class="module-title">Permutation</h2>
-                <p class="module-desc">Practice nPr. Arrange items from a collection where the order DOES matter.</p>
+                <p class="module-desc">Arrange k items from n when order matters.</p>
             </a>
-
-            <!-- Placeholder for future modules -->
-            <div class="module-card coming-soon">
-                <div class="module-icon">⏳</div>
-                <h2 class="module-title">More Coming Soon</h2>
-                <p class="module-desc">New repetition modules are currently being developed.</p>
-            </div>
 
         </div>
+
+        <p class="empty-state hidden" id="emptyState">No modules match your search.</p>
     </main>
 
-    <footer>
-        <p>&copy; <span id="year"></span> IterMath by Jonathan Montolalu. Built for learning.</p>
+    <footer class="site-footer">
+        <p>&copy; <span id="year"></span> IterMath by Jonathan Montolalu</p>
     </footer>
 
-    <!-- JavaScript -->
     <script>
         // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
 
         // Search Filter Logic
         const searchInput = document.getElementById('searchInput');
-        const cards = document.querySelectorAll('.module-card:not(.coming-soon)');
+        const cards = document.querySelectorAll('.module-card');
+        const emptyState = document.getElementById('emptyState');
 
         searchInput.addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
+            const searchTerm = e.target.value.trim().toLowerCase();
+            let visible = 0;
 
             cards.forEach(card => {
-                const title = card.querySelector('.module-title').textContent.toLowerCase();
-                const desc = card.querySelector('.module-desc').textContent.toLowerCase();
-                
-                if (title.includes(searchTerm) || desc.includes(searchTerm)) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
+                const text = card.textContent.toLowerCase();
+                const match = text.includes(searchTerm);
+                card.classList.toggle('hidden', !match);
+                if (match) visible++;
             });
+
+            emptyState.classList.toggle('hidden', visible > 0);
         });
     </script>
 </body>

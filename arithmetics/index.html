@@ -3,152 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Practice - Mixed Operations</title>
-    <!-- Load MathJax for LaTeX rendering -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
-    <style>
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f4f4f9;
-            margin: 0;
-            color: #333;
-        }
-        .container {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
-            max-width: 550px;
-            width: 90%;
-        }
-
-        /* --- Logo Styling --- */
-        .app-logo-wrapper {
-            margin: 0 auto 1.5rem auto; 
-            text-align: center;
-            width: 80%; 
-            max-width: 250px; 
-        }
-        .app-logo {
-            max-width: 100%; 
-            height: auto; 
-        }
-        /* ------------------------- */
-
-        h1 {
-            margin-top: 0;
-            font-size: 1.5rem;
-            color: #2c3e50;
-        }
-        .math-q {
-            font-size: 1.5rem;
-            margin: 2rem 0;
-        }
-        .input-group {
-            margin-bottom: 1.5rem;
-        }
-        input[type="number"] {
-            padding: 0.6rem;
-            font-size: 1rem;
-            width: 140px;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            outline: none;
-            text-align: center;
-            transition: border-color 0.2s;
-        }
-        input[type="number"]:focus {
-            border-color: #007bff;
-        }
-        button {
-            padding: 0.6rem 1.2rem;
-            font-size: 1rem;
-            cursor: pointer;
-            border: none;
-            border-radius: 6px;
-            background-color: #007bff;
-            color: white;
-            font-weight: bold;
-            transition: background 0.2s, transform 0.1s;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        button:active {
-            transform: scale(0.98);
-        }
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-        #next-btn {
-            background-color: #28a745;
-            margin-top: 1.5rem;
-            width: 100%;
-        }
-        #next-btn:hover {
-            background-color: #218838;
-        }
-        .feedback {
-            min-height: 60px;
-        }
-        .correct {
-            color: #28a745;
-            font-weight: bold;
-            font-size: 1.1rem;
-            padding: 1rem;
-            background: #e8f5e9;
-            border-radius: 6px;
-            animation: fadeIn 0.3s ease-in;
-        }
-        .incorrect-container {
-            text-align: left;
-            background: #fffafa;
-            padding: 1.5rem;
-            border-left: 4px solid #dc3545;
-            border-radius: 6px;
-            margin-top: 1rem;
-            animation: fadeIn 0.3s ease-in;
-            overflow-x: auto;
-        }
-        .incorrect-title {
-            color: #dc3545;
-            font-weight: bold;
-            margin-top: 0;
-            margin-bottom: 1rem;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    <title>Mixed Operations Practice | IterMath</title>
+    <meta name="description" content="Practice multi-step expressions that test order of operations, with a PEMDAS reminder on every miss.">
+    <link rel="canonical" href="https://itermath.jomontolalu.com/arithmetics/">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="IterMath">
+    <meta property="og:title" content="Mixed Operations Practice | IterMath">
+    <meta property="og:description" content="Practice multi-step expressions that test order of operations, with a PEMDAS reminder on every miss.">
+    <meta property="og:url" content="https://itermath.jomontolalu.com/arithmetics/">
+    <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="/assets/style.css">
+    <script>
+        // Reveal questions only after MathJax has typeset them
+        window.MathJax = {
+            startup: {
+                pageReady: () => MathJax.startup.defaultPageReady().then(() => document.documentElement.classList.add('math-ready'))
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" onerror="document.documentElement.classList.add('math-ready')"></script>
 </head>
 <body>
 
-<div class="container">
-    <div class="app-logo-wrapper">
-        <img src="\assets\itermath-logo.svg" alt="IterMath Logo" class="app-logo">
-    </div>
-    <h1>Mixed Operations Practice</h1>
+<main class="exercise">
+    <a href="/" class="exercise-logo" aria-label="IterMath home">
+        <img src="/assets/itermath-logo.svg" alt="IterMath" width="160" height="57">
+    </a>
+
+    <h1>Mixed Operations</h1>
     <div id="question-container" class="math-q"></div>
     
     <div class="input-group">
-        <input type="number" id="answer-input" placeholder="Value" autocomplete="off" />
-        <button id="submit-btn" onclick="checkAnswer()">Submit</button>
+        <label for="answer-input" class="visually-hidden">Your answer</label>
+        <input type="number" id="answer-input" class="input" placeholder="Answer" autocomplete="off" inputmode="numeric" />
+        <button id="submit-btn" class="button" onclick="checkAnswer()">Submit</button>
     </div>
     
-    <div id="feedback-container" class="feedback"></div>
-    <button id="next-btn" onclick="generateQuestion()" style="display:none;">Next Question</button>
-</div>
+    <div id="feedback-container" class="feedback" aria-live="polite"></div>
+    <button id="next-btn" class="button button-secondary" onclick="generateQuestion()" style="display:none;">Next Question</button>
+
+    <a href="/" class="back-link">&larr; All modules</a>
+</main>
 
 <script>
     let currentTex, currentAns;
@@ -259,7 +156,7 @@
         document.getElementById('question-container').innerHTML = qHTML;
         
         // Re-render MathJax
-        if (window.MathJax) {
+        if (window.MathJax && MathJax.typesetPromise) {
             MathJax.typesetPromise();
         }
     }
@@ -271,7 +168,8 @@
         const feedback = document.getElementById('feedback-container');
 
         if (isNaN(userAns)) {
-            alert("Please enter a valid number.");
+            feedback.innerHTML = `<p class="hint">Enter a number to check your answer.</p>`;
+            inputElement.focus();
             return;
         }
 
@@ -282,8 +180,8 @@
             // Correct Sequence
             feedback.innerHTML = `
                 <div class="correct">
-                    Correct! Great job. <br>
-                    <span style="font-size: 0.9em; color: #555;">Loading next question...</span>
+                    Correct!
+                    <span class="feedback-note">Loading next question...</span>
                 </div>`;
             
             setTimeout(generateQuestion, 500);
@@ -294,8 +192,8 @@
             steps += `<p class="incorrect-title">Incorrect. The right answer is:</p>`;
             steps += `$$ ${currentTex} = \\mathbf{${currentAns}} $$`;
             
-            steps += `<div style="margin-top: 1.5rem; font-size: 0.95rem; color: #444; background: #f8f9fa; padding: 12px; border-radius: 6px; border: 1px solid #e2e2e2;">`;
-            steps += `<strong style="color: #333;">Reminder - Order of Operations (PEMDAS):</strong><br><br>`;
+            steps += `<div class="note">`;
+            steps += `<strong>Order of operations (PEMDAS)</strong><br>`;
             steps += `<strong>1.</strong> Parentheses <strong>( )</strong><br>`;
             steps += `<strong>2.</strong> Exponents<br>`;
             steps += `<strong>3.</strong> Multiplication <strong>&times;</strong> & Division <strong>&divide;</strong> (Left to Right)<br>`;
@@ -307,7 +205,7 @@
             
             document.getElementById('next-btn').style.display = 'inline-block';
             
-            if (window.MathJax) {
+            if (window.MathJax && MathJax.typesetPromise) {
                 MathJax.typesetPromise();
             }
         }
