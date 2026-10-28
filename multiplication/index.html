@@ -1,252 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Practice - Multiplication</title>
-    <!-- Load MathJax for LaTeX rendering -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
-    <style>
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f4f4f9;
-            margin: 0;
-            color: #333;
-        }
-        .container {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-        }
-
-        /* --- NEW: Logo Styling --- */
-        .app-logo-wrapper {
-            margin: 0 auto 1.5rem auto; /* Centered with bottom margin to separate from title */
-            text-align: center;
-            width: 80%; /* Takes up 80% of its parent's width */
-            max-width: 250px; /* But won't exceed 250px wide on larger screens */
-        }
-        .app-logo {
-            max-width: 100%; /* Important: prevents the image from overflowing its wrapper */
-            height: auto; /* Maintains original aspect ratio */
-        }
-        /* ------------------------- */
-
-        h1 {
-            margin-top: 0;
-            font-size: 1.5rem;
-            color: #2c3e50;
-        }
-        .math-q {
-            font-size: 1.5rem;
-            margin: 2rem 0;
-        }
-        .input-group {
-            margin-bottom: 1.5rem;
-        }
-        input[type="number"] {
-            padding: 0.6rem;
-            font-size: 1rem;
-            width: 120px;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            outline: none;
-            text-align: center;
-            transition: border-color 0.2s;
-        }
-        input[type="number"]:focus {
-            border-color: #007bff;
-        }
-        button {
-            padding: 0.6rem 1.2rem;
-            font-size: 1rem;
-            cursor: pointer;
-            border: none;
-            border-radius: 6px;
-            background-color: #007bff;
-            color: white;
-            font-weight: bold;
-            transition: background 0.2s, transform 0.1s;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        button:active {
-            transform: scale(0.98);
-        }
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-        #next-btn {
-            background-color: #28a745;
-            margin-top: 1.5rem;
-            width: 100%;
-        }
-        #next-btn:hover {
-            background-color: #218838;
-        }
-        .feedback {
-            min-height: 60px;
-        }
-        .correct {
-            color: #28a745;
-            font-weight: bold;
-            font-size: 1.1rem;
-            padding: 1rem;
-            background: #e8f5e9;
-            border-radius: 6px;
-            animation: fadeIn 0.3s ease-in;
-        }
-        .incorrect-container {
-            text-align: left;
-            background: #fffafa;
-            padding: 1.5rem;
-            border-left: 4px solid #dc3545;
-            border-radius: 6px;
-            margin-top: 1rem;
-            animation: fadeIn 0.3s ease-in;
-            overflow-x: auto;
-        }
-        .incorrect-title {
-            color: #dc3545;
-            font-weight: bold;
-            margin-top: 0;
-            margin-bottom: 1rem;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Multiplication practice · IterMath</title>
+  <meta name="description" content="Times tables from 2 × 2 to 12 × 12. Instant feedback and a worked solution for every miss.">
+  <link rel="canonical" href="https://itermath.jomontolalu.com/multiplication">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IterMath">
+  <meta property="og:title" content="Multiplication practice · IterMath">
+  <meta property="og:description" content="Times tables from 2 × 2 to 12 × 12. Instant feedback and a worked solution for every miss.">
+  <meta property="og:url" content="https://itermath.jomontolalu.com/multiplication">
+  <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
+  <header class="container container--narrow topbar">
+    <a class="back" href="/" aria-label="All modules"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><img src="/assets/itermath-logo.svg" alt="" width="104" height="37"></a>
+  </header>
 
-<div class="container">
-    <div class="app-logo-wrapper">
-        <img src="\assets\itermath-logo.svg" alt="IterMath Logo" class="app-logo">
+  <main class="container container--narrow">
+    <div class="practice-header">
+      <h1 class="h1">Multiplication</h1>
+      <p class="lead">Times tables from 2 × 2 to 12 × 12.</p>
     </div>
-    <h1>Multiplication Exercise</h1>
-    <div id="question-container" class="math-q"></div>
-    
-    <div class="input-group">
-        <input type="number" id="answer-input" placeholder="Value" autocomplete="off" />
-        <button id="submit-btn" onclick="checkAnswer()">Submit</button>
-    </div>
-    
-    <div id="feedback-container" class="feedback"></div>
-    <button id="next-btn" onclick="generateQuestion()" style="display:none;">Next Question</button>
-</div>
 
-<script>
-    let currentA, currentB, currentAns;
+    <section class="card panel" aria-label="Exercise">
+      <p id="question" class="question" aria-live="polite"></p>
+      <form id="form" novalidate autocomplete="off">
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <div class="answer-row">
+          <input id="answer" class="input" type="text" inputmode="numeric" pattern="[0-9]*" enterkeyhint="done" placeholder="Answer" aria-describedby="error">
+          <button id="action" class="btn" type="submit">Check</button>
+        </div>
+        <p id="error" class="field-error" role="alert" hidden></p>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
 
-    // Initialize and generate the first question
-    function generateQuestion() {
-        // Reset UI state
-        document.getElementById('feedback-container').innerHTML = '';
-        const input = document.getElementById('answer-input');
-        input.value = '';
-        input.disabled = false;
-        document.getElementById('submit-btn').style.display = 'inline-block';
-        document.getElementById('next-btn').style.display = 'none';
-        
-        // Focus the input field automatically
-        input.focus();
-
-        // Generate random numbers for multiplication (e.g., between 2 and 12 for standard times tables)
-        currentA = Math.floor(Math.random() * 11) + 2; 
-        currentB = Math.floor(Math.random() * 11) + 2; 
-        
-        // Calculate the correct answer
-        currentAns = currentA * currentB;
-
-        // Display question using LaTeX notation (\times for multiplication symbol)
-        const qHTML = `$$ ${currentA} \\times ${currentB} = \\text{?} $$`;
-        document.getElementById('question-container').innerHTML = qHTML;
-        
-        // Re-render MathJax
-        if (window.MathJax) {
-            MathJax.typesetPromise();
+  <script src="/assets/practice.js"></script>
+  <script>
+    (function (M) {
+      M.practice({
+        allowNegative: false,
+        generate: function () {
+    var a = M.rand(2, 12), b = M.rand(2, 12);
+    return { question: a + ' × ' + b, answer: a * b, solution: M.column(a, '*', b, a * b) };
         }
-    }
-
-    // Check user input against the calculated answer
-    function checkAnswer() {
-        const inputElement = document.getElementById('answer-input');
-        const userAns = parseInt(inputElement.value);
-        const feedback = document.getElementById('feedback-container');
-
-        // Input validation
-        if (isNaN(userAns)) {
-            alert("Please enter a valid number.");
-            return;
-        }
-
-        // Disable input and hide submit button to prevent double submissions
-        inputElement.disabled = true;
-        document.getElementById('submit-btn').style.display = 'none';
-
-        if (userAns === currentAns) {
-            // Correct Answer Sequence
-            feedback.innerHTML = `
-                <div class="correct">
-                    Correct! Great job. <br>
-                    <span style="font-size: 0.9em; color: #555;">Loading next question...</span>
-                </div>`;
-            
-            // Wait 0.5 seconds, then automatically generate the next question
-            setTimeout(generateQuestion, 500);
-            
-        } else {
-            // Incorrect Answer Sequence
-            
-            // Build the LaTeX visual solution for multiplication (Vertical alignment)
-            let steps = `<div class="incorrect-container">`;
-            steps += `<p class="incorrect-title">Incorrect. Here is the solution:</p>`;
-            
-            steps += `$$ \\begin{array}{r} `;
-            steps += `${currentA} \\\\[2pt]`;
-            steps += `\\times \\; ${currentB} \\\\[2pt]`;
-            steps += `\\hline \\\\[-8pt]`;
-            steps += `\\mathbf{${currentAns}}`;
-            steps += `\\end{array} $$`;
-            steps += `</div>`;
-
-            feedback.innerHTML = steps;
-            
-            // Show manual next button
-            document.getElementById('next-btn').style.display = 'inline-block';
-            
-            // Re-render MathJax for the newly injected LaTeX
-            if (window.MathJax) {
-                MathJax.typesetPromise();
-            }
-        }
-    }
-
-    // Allow pressing "Enter" key inside the input field to trigger submission
-    document.getElementById('answer-input').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            checkAnswer();
-        }
-    });
-
-    // Run once on load
-    window.onload = generateQuestion;
-</script>
-
+      });
+    })(IterMath);
+  </script>
 </body>
 </html>
