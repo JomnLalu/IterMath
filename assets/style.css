@@ -195,13 +195,11 @@ main { flex: 1; }
 .module-title { font-weight: 600; }
 .module-desc { display: block; margin-top: var(--s1); }
 .module-grade {
-  display: inline-block;
+  display: block;
   margin-top: var(--s2);
-  padding: 0 var(--s2);
-  border: 1px solid var(--border);
-  border-radius: 999px;
   color: var(--muted);
-  font-size: 12px; line-height: 20px; font-weight: 500;
+  font-size: 12px; line-height: 16px; font-weight: 600;
+  letter-spacing: .02em;
   font-variant-numeric: tabular-nums;
 }
 
@@ -215,7 +213,7 @@ main { flex: 1; }
   height: 36px;
   padding: 0 var(--s4);
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: var(--surface);
   color: var(--muted);
   font-size: 14px; line-height: 20px; font-weight: 500;
@@ -429,15 +427,17 @@ sub { vertical-align: -.25em; }
   vertical-align: middle;
   margin-right: .15em;
 }
-.bigop-sign { font-size: 1.5em; line-height: 1; font-weight: 400; }
+.bigop-sign { font-size: 1.6em; line-height: 1; font-weight: 400; }
 .bigop-limits {
   display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
   align-self: stretch;
-  margin-left: .1em;
-  font-size: .55em;
-  line-height: 1.2;
+  margin-left: .2em;
+  margin-right: .15em;
+  padding: .1em 0;
+  font-size: .5em;
+  line-height: 1.25;
 }
 .lim { flex-direction: column; line-height: 1.1; }
 .lim > span:last-child { font-size: .55em; line-height: 1.2; font-weight: 400; }

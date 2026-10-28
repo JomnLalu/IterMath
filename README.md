@@ -18,7 +18,7 @@
   <img src="https://img.shields.io/badge/modules-62-89d957" alt="62 modules">
   <img src="https://img.shields.io/badge/grades-K%E2%80%9312-356b14" alt="Grades K–12">
   <img src="https://img.shields.io/badge/dependencies-none-18181b" alt="No dependencies">
-  <img src="https://img.shields.io/badge/hosted%20on-Cloudflare%20Pages-f38020" alt="Hosted on Cloudflare Pages">
+  <img src="https://img.shields.io/badge/hosted%20on-Cloudflare%20Pages-52525b" alt="Hosted on Cloudflare Pages">
 </p>
 
 <p align="center">
