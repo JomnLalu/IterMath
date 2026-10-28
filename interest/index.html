@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Simple and compound interest practice · IterMath</title>
+  <meta name="description" content="Work out simple interest with I = Prt and compound interest with A = P(1 + r/n)^nt. Instant feedback and a worked solution for every miss.">
+  <link rel="canonical" href="https://itermath.jomontolalu.com/interest">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IterMath">
+  <meta property="og:title" content="Simple and compound interest practice · IterMath">
+  <meta property="og:description" content="Work out simple interest with I = Prt and compound interest with A = P(1 + r/n)^nt. Instant feedback and a worked solution for every miss.">
+  <meta property="og:url" content="https://itermath.jomontolalu.com/interest">
+  <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="container container--narrow topbar">
+    <a class="back" href="/" aria-label="All modules"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><img src="/assets/itermath-logo.svg" alt="" width="104" height="37"></a>
+  </header>
+
+  <main class="container container--narrow">
+    <div class="practice-header">
+      <p class="eyebrow small muted">Ratios and percents · Grades 7–12</p>
+      <h1 class="h1">Simple and compound interest</h1>
+      <p class="lead">Work out simple interest with I = Prt and compound interest with A = P(1 + r/n)<sup>nt</sup>.</p>
+    </div>
+
+    <section class="card panel" aria-label="Exercise">
+      <p id="question" class="question" aria-live="polite"></p>
+      <form id="form" novalidate autocomplete="off">
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <div class="answer-row">
+          <input id="answer" class="input" type="text" inputmode="decimal" enterkeyhint="done" placeholder="Answer" aria-describedby="hint error">
+          <button id="action" class="btn" type="submit">Check</button>
+        </div>
+        <p id="hint" class="field-hint small muted">Round money to the nearest cent.</p>
+        <p id="error" class="field-error" role="alert" hidden></p>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="/assets/practice.js"></script>
+  <script>
+    (function (M) {
+      M.practice({
+        input: 'number',
+        generate: function () {
+          var money = function (x) { return '$' + x.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+          var P = M.rand(5, 100) * 100, r = M.pick([2, 3, 4, 5, 6, 8, 10]), t = M.rand(2, 10), kind = M.rand(1, 4);
+          if (kind <= 2) {
+            var I = P * r * t / 100, total = kind === 2;
+            return {
+              prompt: money(P) + ' at ' + r + '% simple interest for ' + t + ' years.', question: total ? 'Total amount' : 'Interest',
+              ask: '= $<span class="muted">?</span>', answer: total ? P + I : I, display: money(total ? P + I : I),
+              solution: M.steps([['<i>I</i>', '= <i>Prt</i>'], ['', '= ' + P + ' × ' + (r / 100) + ' × ' + t], ['', '= ' + money(I)]].concat(total ? [['<i>A</i>', '= ' + money(P) + ' + ' + money(I) + ' = <strong>' + money(P + I) + '</strong>']] : [['', '= <strong>' + money(I) + '</strong>']]))
+            };
+          }
+          var nPer = kind === 3 ? 1 : M.pick([4, 12]), label = { 1: 'annually', 4: 'quarterly', 12: 'monthly' }[nPer];
+          var A = M.round(P * Math.pow(1 + r / 100 / nPer, nPer * t), 2);
+          var base = nPer === 1 ? '(1 + ' + (r / 100) + ')' : '(1 + ' + M.frac(r / 100, nPer) + ')';
+          return {
+            prompt: money(P) + ' at ' + r + '% compounded ' + label + ' for ' + t + ' years.', question: 'Amount',
+            ask: '= $<span class="muted">?</span>', answer: A, places: 2, display: money(A),
+            solution: M.steps([['<i>A</i>', '= <i>P</i>(1 + <i>r</i>/<i>n</i>)<sup><i>nt</i></sup>'], ['', '= ' + P + ' × ' + M.pow(base, nPer * t)], ['', '≈ <strong>' + money(A) + '</strong>']])
+          };
+        }
+      });
+    })(IterMath);
+  </script>
+</body>
+</html>

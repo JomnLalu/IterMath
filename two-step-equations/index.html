@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Two-step equations practice · IterMath</title>
+  <meta name="description" content="Solve equations that take two inverse operations. Instant feedback and a worked solution for every miss.">
+  <link rel="canonical" href="https://itermath.jomontolalu.com/two-step-equations">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IterMath">
+  <meta property="og:title" content="Two-step equations practice · IterMath">
+  <meta property="og:description" content="Solve equations that take two inverse operations. Instant feedback and a worked solution for every miss.">
+  <meta property="og:url" content="https://itermath.jomontolalu.com/two-step-equations">
+  <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="container container--narrow topbar">
+    <a class="back" href="/" aria-label="All modules"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><img src="/assets/itermath-logo.svg" alt="" width="104" height="37"></a>
+  </header>
+
+  <main class="container container--narrow">
+    <div class="practice-header">
+      <p class="eyebrow small muted">Algebra · Grades 7–8</p>
+      <h1 class="h1">Two-step equations</h1>
+      <p class="lead">Solve equations that take two inverse operations.</p>
+    </div>
+
+    <section class="card panel" aria-label="Exercise">
+      <p id="question" class="question" aria-live="polite"></p>
+      <form id="form" novalidate autocomplete="off">
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <div class="answer-row">
+          <input id="answer" class="input" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="x =" aria-describedby="hint error">
+          <button id="action" class="btn" type="submit">Check</button>
+        </div>
+        <p id="hint" class="field-hint small muted" hidden></p>
+        <p id="error" class="field-error" role="alert" hidden></p>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="/assets/practice.js"></script>
+  <script>
+    (function (M) {
+      M.practice({
+        input: 'number',
+        generate: function () {
+          var n = M.num, o = M.operand, x = M.v('x'), xs = M.randNZ(-10, 12), a = M.randNZ(-9, 9), b = M.randNZ(-20, 20), t = M.rand(1, 4), eq, rows;
+          if (Math.abs(a) === 1) a = M.pick([2, 3, -4, 5]);
+          var lhs = M.terms([[a, x], [b, '']]), sideB = b < 0 ? ' + ' + Math.abs(b) : ' − ' + b;
+          if (t === 1) {
+            var c = a * xs + b; eq = lhs + ' = ' + n(c);
+            rows = [[M.terms([[a, x]]), '= ' + n(c) + sideB + ' = ' + n(c - b)], [x, '= ' + M.frac(n(c - b), o(a)) + ' = <strong>' + n(xs) + '</strong>']];
+          } else if (t === 2) {
+            var d = M.rand(2, 6), k = M.randNZ(-8, 8); xs = d * k; var c2 = k + b;
+            eq = M.frac(x, d) + (b < 0 ? ' − ' + Math.abs(b) : ' + ' + b) + ' = ' + n(c2);
+            rows = [[M.frac(x, d), '= ' + n(c2) + sideB + ' = ' + n(k)], [x, '= ' + n(k) + ' × ' + d + ' = <strong>' + n(xs) + '</strong>']];
+          } else if (t === 3) {
+            var m = M.rand(2, 6), c3 = m * (xs + b);
+            eq = m + '(' + M.terms([[1, x], [b, '']]) + ') = ' + n(c3);
+            rows = [[M.terms([[1, x], [b, '']]), '= ' + n(c3) + ' ÷ ' + m + ' = ' + n(xs + b)], [x, '= ' + n(xs + b) + sideB + ' = <strong>' + n(xs) + '</strong>']];
+          } else {
+            var aa = M.rand(2, 9), bb = M.rand(5, 30), c4 = bb - aa * xs;
+            eq = bb + ' − ' + aa + x + ' = ' + n(c4);
+            rows = [['−' + aa + x, '= ' + n(c4) + ' − ' + bb + ' = ' + n(c4 - bb)], [x, '= ' + M.frac(n(c4 - bb), '−' + aa) + ' = <strong>' + n(xs) + '</strong>']];
+          }
+          return { prompt: 'Solve for ' + x + '.', question: eq, ask: false, answer: xs, solution: M.steps([[eq, '']].concat(rows)) + M.note('Undo addition and subtraction first, then multiplication and division.') };
+        }
+      });
+    })(IterMath);
+  </script>
+</body>
+</html>

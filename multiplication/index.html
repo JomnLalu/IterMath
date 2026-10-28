@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Multiplication practice · IterMath</title>
-  <meta name="description" content="Times tables from 2 × 2 to 12 × 12. Instant feedback and a worked solution for every miss.">
+  <meta name="description" content="Times tables from 2 × 2 to 12 × 12. Instant feedback and a worked solution for every miss.">
   <link rel="canonical" href="https://itermath.jomontolalu.com/multiplication">
   <meta name="theme-color" content="#fafafa">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
@@ -12,7 +12,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="IterMath">
   <meta property="og:title" content="Multiplication practice · IterMath">
-  <meta property="og:description" content="Times tables from 2 × 2 to 12 × 12. Instant feedback and a worked solution for every miss.">
+  <meta property="og:description" content="Times tables from 2 × 2 to 12 × 12. Instant feedback and a worked solution for every miss.">
   <meta property="og:url" content="https://itermath.jomontolalu.com/multiplication">
   <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
   <meta property="og:image:width" content="1200">
@@ -27,8 +27,9 @@
 
   <main class="container container--narrow">
     <div class="practice-header">
+      <p class="eyebrow small muted">Arithmetic · Grades 3–4</p>
       <h1 class="h1">Multiplication</h1>
-      <p class="lead">Times tables from 2 × 2 to 12 × 12.</p>
+      <p class="lead">Times tables from 2 × 2 to 12 × 12.</p>
     </div>
 
     <section class="card panel" aria-label="Exercise">
@@ -36,9 +37,10 @@
       <form id="form" novalidate autocomplete="off">
         <label for="answer" class="visually-hidden">Your answer</label>
         <div class="answer-row">
-          <input id="answer" class="input" type="text" inputmode="numeric" pattern="[0-9]*" enterkeyhint="done" placeholder="Answer" aria-describedby="error">
+          <input id="answer" class="input" type="text" inputmode="numeric" pattern="[0-9]*" enterkeyhint="done" placeholder="Answer" aria-describedby="hint error">
           <button id="action" class="btn" type="submit">Check</button>
         </div>
+        <p id="hint" class="field-hint small muted" hidden></p>
         <p id="error" class="field-error" role="alert" hidden></p>
       </form>
       <div id="feedback" class="feedback" aria-live="polite"></div>

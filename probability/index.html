@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Probability practice · IterMath</title>
+  <meta name="description" content="Find probabilities with marbles, dice and coins, including two events in a row. Instant feedback and a worked solution for every miss.">
+  <link rel="canonical" href="https://itermath.jomontolalu.com/probability">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IterMath">
+  <meta property="og:title" content="Probability practice · IterMath">
+  <meta property="og:description" content="Find probabilities with marbles, dice and coins, including two events in a row. Instant feedback and a worked solution for every miss.">
+  <meta property="og:url" content="https://itermath.jomontolalu.com/probability">
+  <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="container container--narrow topbar">
+    <a class="back" href="/" aria-label="All modules"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><img src="/assets/itermath-logo.svg" alt="" width="104" height="37"></a>
+  </header>
+
+  <main class="container container--narrow">
+    <div class="practice-header">
+      <p class="eyebrow small muted">Statistics and probability · Grades 7–12</p>
+      <h1 class="h1">Probability</h1>
+      <p class="lead">Find probabilities with marbles, dice and coins, including two events in a row.</p>
+    </div>
+
+    <section class="card panel" aria-label="Exercise">
+      <p id="question" class="question" aria-live="polite"></p>
+      <form id="form" novalidate autocomplete="off">
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <div class="answer-row">
+          <input id="answer" class="input" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="Answer" aria-describedby="hint error">
+          <button id="action" class="btn" type="submit">Check</button>
+        </div>
+        <p id="hint" class="field-hint small muted">Simplest form. Type a fraction like 3/10.</p>
+        <p id="error" class="field-error" role="alert" hidden></p>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="/assets/practice.js"></script>
+  <script>
+    (function (M) {
+      M.practice({
+        input: 'number',
+        generate: function () {
+          var t = M.rand(1, 6), ans, prompt, q, rows;
+          var r = M.rand(1, 9), b = M.rand(1, 9), g = M.rand(1, 9), tot = r + b + g;
+          var colors = [['red', r], ['blue', b], ['green', g]], pick = M.pick(colors);
+          var bag = 'A bag has ' + r + ' red, ' + b + ' blue and ' + g + ' green marbles.';
+          if (t === 1) {
+            ans = M.Q(pick[1], tot); prompt = bag + ' One is picked at random.'; q = '<i>P</i>(' + pick[0] + ')';
+            rows = [[q, '= ' + M.frac(pick[1], tot)]];
+          } else if (t === 2) {
+            ans = M.Q(tot - pick[1], tot); prompt = bag + ' One is picked at random.'; q = '<i>P</i>(not ' + pick[0] + ')';
+            rows = [[q, '= 1 − ' + M.frac(pick[1], tot)], ['', '= ' + M.frac(tot - pick[1], tot)]];
+          } else if (t === 3) {
+            var events = [['an even number', [2, 4, 6]], ['a number greater than 4', [5, 6]], ['a multiple of 3', [3, 6]], ['a prime number', [2, 3, 5]], ['a number less than 3', [1, 2]], ['a 6', [6]]];
+            var ev = M.pick(events); ans = M.Q(ev[1].length, 6); prompt = 'A fair six-sided die is rolled.'; q = '<i>P</i>(' + ev[0] + ')';
+            rows = [['outcomes', ev[1].join(', ')], [q, '= ' + M.frac(ev[1].length, 6)]];
+          } else if (t === 4) {
+            var s = M.rand(2, 12), ways = 6 - Math.abs(s - 7); ans = M.Q(ways, 36); prompt = 'Two fair dice are rolled.'; q = '<i>P</i>(sum is ' + s + ')';
+            var pairs = []; for (var i = 1; i <= 6; i++) { var j = s - i; if (j >= 1 && j <= 6) pairs.push('(' + i + ', ' + j + ')'); }
+            rows = [['ways', pairs.join(' ')], [q, '= ' + M.frac(ways, 36)]];
+          } else if (t === 5) {
+            var k = M.rand(2, 5), all = Math.random() < .5; ans = all ? M.Q(1, Math.pow(2, k)) : M.Q(Math.pow(2, k) - 1, Math.pow(2, k));
+            prompt = 'A fair coin is flipped ' + k + ' times.'; q = all ? '<i>P</i>(all heads)' : '<i>P</i>(at least one tail)';
+            rows = all ? [[q, '= ' + M.pow('(' + M.frac(1, 2) + ')', k) + ' = ' + M.frac(1, Math.pow(2, k))]] : [[q, '= 1 − <i>P</i>(all heads)'], ['', '= 1 − ' + M.frac(1, Math.pow(2, k)) + ' = ' + M.frac(Math.pow(2, k) - 1, Math.pow(2, k))]];
+          } else {
+            r = M.rand(2, 8); b = M.rand(2, 8); tot = r + b;
+            ans = M.Q(r * (r - 1), tot * (tot - 1)); prompt = 'A bag has ' + r + ' red and ' + b + ' blue marbles. Two are taken without replacement.'; q = '<i>P</i>(both red)';
+            rows = [[q, '= ' + M.frac(r, tot) + ' × ' + M.frac(r - 1, tot - 1)], ['', '= ' + M.frac(r * (r - 1), tot * (tot - 1))]];
+          }
+          var last = rows[rows.length - 1];
+          if (last[1] === '= ' + M.q(ans)) last[1] = '= <strong>' + M.q(ans) + '</strong>';
+          else rows.push(['', '= <strong>' + M.q(ans) + '</strong>']);
+          return { prompt: prompt, question: q, answer: ans, solution: M.steps(rows) };
+        }
+      });
+    })(IterMath);
+  </script>
+</body>
+</html>

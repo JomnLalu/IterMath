@@ -27,6 +27,7 @@
 
   <main class="container container--narrow">
     <div class="practice-header">
+      <p class="eyebrow small muted">Statistics and probability · Grades 10–12</p>
       <h1 class="h1">Permutations</h1>
       <p class="lead">Count the ways to arrange items when order matters. Sets of 3 to 8.</p>
     </div>
@@ -36,9 +37,10 @@
       <form id="form" novalidate autocomplete="off">
         <label for="answer" class="visually-hidden">Your answer</label>
         <div class="answer-row">
-          <input id="answer" class="input" type="text" inputmode="numeric" pattern="[0-9]*" enterkeyhint="done" placeholder="Answer" aria-describedby="error">
+          <input id="answer" class="input" type="text" inputmode="numeric" pattern="[0-9]*" enterkeyhint="done" placeholder="Answer" aria-describedby="hint error">
           <button id="action" class="btn" type="submit">Check</button>
         </div>
+        <p id="hint" class="field-hint small muted" hidden></p>
         <p id="error" class="field-error" role="alert" hidden></p>
       </form>
       <div id="feedback" class="feedback" aria-live="polite"></div>

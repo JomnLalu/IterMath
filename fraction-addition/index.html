@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Adding and subtracting fractions practice · IterMath</title>
+  <meta name="description" content="Add and subtract fractions with like and unlike denominators, and mixed numbers. Instant feedback and a worked solution for every miss.">
+  <link rel="canonical" href="https://itermath.jomontolalu.com/fraction-addition">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IterMath">
+  <meta property="og:title" content="Adding and subtracting fractions practice · IterMath">
+  <meta property="og:description" content="Add and subtract fractions with like and unlike denominators, and mixed numbers. Instant feedback and a worked solution for every miss.">
+  <meta property="og:url" content="https://itermath.jomontolalu.com/fraction-addition">
+  <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="container container--narrow topbar">
+    <a class="back" href="/" aria-label="All modules"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><img src="/assets/itermath-logo.svg" alt="" width="104" height="37"></a>
+  </header>
+
+  <main class="container container--narrow">
+    <div class="practice-header">
+      <p class="eyebrow small muted">Fractions and decimals · Grades 4–6</p>
+      <h1 class="h1">Adding and subtracting fractions</h1>
+      <p class="lead">Add and subtract fractions with like and unlike denominators, and mixed numbers.</p>
+    </div>
+
+    <section class="card panel" aria-label="Exercise">
+      <p id="question" class="question" aria-live="polite"></p>
+      <form id="form" novalidate autocomplete="off">
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <div class="answer-row">
+          <input id="answer" class="input" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="Answer" aria-describedby="hint error">
+          <button id="action" class="btn" type="submit">Check</button>
+        </div>
+        <p id="hint" class="field-hint small muted">Simplest form. Type 5/6 or a mixed number like 1 1/4.</p>
+        <p id="error" class="field-error" role="alert" hidden></p>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="/assets/practice.js"></script>
+  <script>
+    (function (M) {
+      M.practice({
+        input: 'number',
+        generate: function () {
+          var op = M.pick(['+', '-']), type = M.rand(1, 3), n1, d1, n2, d2, w1 = 0, w2 = 0;
+          function proper(maxd) { var d = M.rand(2, maxd), x; do { x = M.rand(1, d - 1); } while (M.gcd(x, d) !== 1); return [x, d]; }
+          if (type === 1) {
+            d1 = d2 = M.rand(3, 12);
+            do { n1 = M.rand(1, d1 - 1); n2 = M.rand(1, d1 - 1); } while (n1 === n2);
+          } else {
+            var a, b;
+            do { a = proper(10); b = proper(10); } while (a[1] === b[1]);
+            n1 = a[0]; d1 = a[1]; n2 = b[0]; d2 = b[1];
+            if (type === 3) { w1 = M.rand(1, 5); w2 = M.rand(1, 4); }
+          }
+          var A = M.Q(w1 * d1 + n1, d1), B = M.Q(w2 * d2 + n2, d2);
+          if (op === '-' && M.toQ(A).n * B.d < B.n * A.d) {
+            var t; t = n1; n1 = n2; n2 = t; t = d1; d1 = d2; d2 = t; t = w1; w1 = w2; w2 = t; t = A; A = B; B = t;
+          }
+          var ans = op === '+' ? M.qadd(A, B) : M.qsub(A, B);
+          var show = function (w, x, d) { return (w ? w : '') + M.frac(x, d); };
+          var q = show(w1, n1, d1) + ' ' + M.sym(op) + ' ' + show(w2, n2, d2);
+          var i1 = w1 * d1 + n1, i2 = w2 * d2 + n2, L = M.lcm(d1, d2), rows = [];
+          if (w1 || w2) rows.push([q, '= ' + M.frac(i1, d1) + ' ' + M.sym(op) + ' ' + M.frac(i2, d2)]);
+          var c1 = i1 * L / d1, c2 = i2 * L / d2, raw = op === '+' ? c1 + c2 : c1 - c2;
+          if (d1 !== d2) rows.push([rows.length ? '' : q, '= ' + M.frac(c1, L) + ' ' + M.sym(op) + ' ' + M.frac(c2, L)]);
+          rows.push([rows.length ? '' : q, '= ' + M.frac(raw, L)]);
+          if (ans.d !== L || ans.n !== raw) rows.push(['', '= <strong>' + M.q(ans, true) + '</strong>']);
+          else rows[rows.length - 1][1] = '= <strong>' + M.q(ans, true) + '</strong>';
+          return {
+            question: q, answer: ans, display: M.q(ans, true),
+            solution: M.steps(rows) + (d1 !== d2 ? M.note('The least common denominator of ' + d1 + ' and ' + d2 + ' is ' + L + '.') : M.note('The denominators match, so ' + (op === '+' ? 'add' : 'subtract') + ' the numerators.'))
+          };
+        }
+      });
+    })(IterMath);
+  </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sequences and series practice · IterMath</title>
+  <meta name="description" content="Work with arithmetic and geometric sequences: the next term, the nth term and sums. Instant feedback and a worked solution for every miss.">
+  <link rel="canonical" href="https://itermath.jomontolalu.com/sequences">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IterMath">
+  <meta property="og:title" content="Sequences and series practice · IterMath">
+  <meta property="og:description" content="Work with arithmetic and geometric sequences: the next term, the nth term and sums. Instant feedback and a worked solution for every miss.">
+  <meta property="og:url" content="https://itermath.jomontolalu.com/sequences">
+  <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="container container--narrow topbar">
+    <a class="back" href="/" aria-label="All modules"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><img src="/assets/itermath-logo.svg" alt="" width="104" height="37"></a>
+  </header>
+
+  <main class="container container--narrow">
+    <div class="practice-header">
+      <p class="eyebrow small muted">Advanced algebra and trigonometry · Grades 9–12</p>
+      <h1 class="h1">Sequences and series</h1>
+      <p class="lead">Work with arithmetic and geometric sequences: the next term, the nth term and sums.</p>
+    </div>
+
+    <section class="card panel" aria-label="Exercise">
+      <p id="question" class="question" aria-live="polite"></p>
+      <form id="form" novalidate autocomplete="off">
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <div class="answer-row">
+          <input id="answer" class="input" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="Answer" aria-describedby="hint error">
+          <button id="action" class="btn" type="submit">Check</button>
+        </div>
+        <p id="hint" class="field-hint small muted" hidden></p>
+        <p id="error" class="field-error" role="alert" hidden></p>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="/assets/practice.js"></script>
+  <script>
+    (function (M) {
+      M.practice({
+        input: 'number',
+        generate: function () {
+          var n = M.num, t = M.rand(1, 5), ord = function (k) { var s = ['th', 'st', 'nd', 'rd'], v = k % 100; return k + (s[(v - 20) % 10] || s[v] || s[0]); };
+          var list = function (a, step, geo, cnt) { var out = [], v = a; for (var i = 0; i < cnt; i++) { out.push(n(v)); v = geo ? v * step : v + step; } return out.join(', ') + ', …'; };
+          var a1 = M.randNZ(-10, 20), d = M.randNZ(-7, 9), k = M.rand(8, 40);
+          if (t === 1) {
+            var nxt = a1 + 4 * d;
+            return { prompt: 'Find the next term.', question: list(a1, d, false, 4), ask: false, answer: nxt, solution: M.steps([['difference', '= ' + n(d)], ['next', '= ' + n(a1 + 3 * d) + (d < 0 ? ' − ' + -d : ' + ' + d) + ' = <strong>' + n(nxt) + '</strong>']]) };
+          }
+          if (t === 2) {
+            var an = a1 + (k - 1) * d;
+            return { prompt: 'Find the ' + ord(k) + ' term.', question: list(a1, d, false, 4), ask: false, answer: an, solution: M.steps([['<i>a</i><sub>n</sub>', '= <i>a</i><sub>1</sub> + (<i>n</i> − 1)<i>d</i>'], ['<i>a</i><sub>' + k + '</sub>', '= ' + n(a1) + ' + (' + k + ' − 1)(' + n(d) + ')'], ['', '= <strong>' + n(an) + '</strong>']]) };
+          }
+          var g1 = M.rand(1, 5) * M.pick([1, 1, -1]), r = M.pick([2, 2, 3, -2, -3]), m = M.rand(4, r === 2 || r === -2 ? 9 : 6);
+          if (t === 3) {
+            var gn = g1 * Math.pow(r, m - 1);
+            return { prompt: 'Find the ' + ord(m) + ' term.', question: list(g1, r, true, 4), ask: false, answer: gn, solution: M.steps([['<i>a</i><sub>n</sub>', '= <i>a</i><sub>1</sub> · ' + M.pow('<i>r</i>', '<i>n</i> − 1')], ['<i>a</i><sub>' + m + '</sub>', '= ' + n(g1) + ' · ' + M.pow('(' + n(r) + ')', m - 1)], ['', '= <strong>' + n(gn) + '</strong>']]) };
+          }
+          if (t === 4) {
+            k = M.rand(5, 25); var last = a1 + (k - 1) * d, S = k * (a1 + last) / 2;
+            return { prompt: 'Find the sum of the first ' + k + ' terms.', question: list(a1, d, false, 4), ask: false, answer: S, solution: M.steps([['<i>a</i><sub>' + k + '</sub>', '= ' + n(a1) + ' + ' + (k - 1) + '(' + n(d) + ') = ' + n(last)], ['<i>S</i><sub>' + k + '</sub>', '= ' + M.frac(k, 2) + '(' + n(a1) + ' + ' + M.operand(last) + ')'], ['', '= <strong>' + n(S) + '</strong>']]) };
+          }
+          m = M.rand(3, 7); var Sg = g1 * (Math.pow(r, m) - 1) / (r - 1);
+          return { prompt: 'Find the sum of the first ' + m + ' terms.', question: list(g1, r, true, 4), ask: false, answer: Sg, solution: M.steps([['<i>S</i><sub>n</sub>', '= ' + M.frac('<i>a</i><sub>1</sub>(' + M.pow('<i>r</i>', '<i>n</i>') + ' − 1)', '<i>r</i> − 1')], ['', '= ' + M.frac(n(g1) + '(' + M.pow('(' + n(r) + ')', m) + ' − 1)', n(r) + ' − 1')], ['', '= <strong>' + n(Sg) + '</strong>']]) };
+        }
+      });
+    })(IterMath);
+  </script>
+</body>
+</html>

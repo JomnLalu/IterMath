@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>IterMath · Math practice drills</title>
-  <meta name="description" content="Short math drills for arithmetic, combinations and permutations. Instant feedback and a worked solution for every miss.">
+  <title>IterMath · K–12 math practice</title>
+  <meta name="description" content="Free K–12 math practice: arithmetic, fractions, percents, geometry, algebra, trigonometry and calculus. Instant feedback and a worked solution for every miss.">
   <link rel="canonical" href="https://itermath.jomontolalu.com/">
   <meta name="theme-color" content="#fafafa">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="IterMath">
-  <meta property="og:title" content="IterMath · Math practice drills">
-  <meta property="og:description" content="Short math drills for arithmetic, combinations and permutations. Instant feedback and a worked solution for every miss.">
+  <meta property="og:title" content="IterMath · K–12 math practice">
+  <meta property="og:description" content="Free K–12 math practice: arithmetic, fractions, percents, geometry, algebra, trigonometry and calculus. Instant feedback and a worked solution for every miss.">
   <meta property="og:url" content="https://itermath.jomontolalu.com/">
   <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
   <meta property="og:image:width" content="1200">
@@ -24,84 +24,688 @@
   <main>
     <header class="container home-header">
       <h1><img class="logo" src="/assets/itermath-logo.svg" alt="IterMath" width="260" height="92"></h1>
-      <p class="lead">Short math drills for arithmetic and counting. Answer, get instant feedback, and see the full working whenever you miss.</p>
+      <p class="lead">Short drills for every calculation from kindergarten to grade 12, from number bonds to integrals. Answer, get instant feedback, and see the full working whenever you miss.</p>
     </header>
 
     <div class="container">
       <div class="search" role="search">
         <label for="search" class="visually-hidden">Search modules</label>
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
-        <input id="search" class="input" type="search" placeholder="Search modules" autocomplete="off" enterkeyhint="search">
+        <input id="search" class="input" type="search" placeholder="Search 62 modules" autocomplete="off" enterkeyhint="search">
+      </div>
+      <div class="filters" role="group" aria-label="Filter by grade">
+        <button class="chip" type="button" data-band="" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-band="0-2" aria-pressed="false">K–2</button>
+        <button class="chip" type="button" data-band="3-5" aria-pressed="false">3–5</button>
+        <button class="chip" type="button" data-band="6-8" aria-pressed="false">6–8</button>
+        <button class="chip" type="button" data-band="9-12" aria-pressed="false">9–12</button>
       </div>
 
-      <section class="group" aria-labelledby="g-arithmetic">
-        <h2 id="g-arithmetic" class="h2">Arithmetic</h2>
+      <section class="group" aria-labelledby="g-number">
+        <h2 id="g-number" class="h2">Number sense</h2>
         <ul class="module-list">
-          <li>
-            <a class="card module" href="/addition">
-              <span class="tile" aria-hidden="true">+</span>
+          <li data-grades="0-1">
+            <a class="card module" href="/number-bonds">
+              <span class="tile tile--sm" aria-hidden="true">+?</span>
               <span>
-                <span class="module-title">Addition</span>
-                <span class="module-desc small muted">Add two 2-digit numbers.</span>
+                <span class="module-title">Number bonds</span>
+                <span class="module-desc small muted">Find the missing part that makes 5, 10 or 20.</span>
+                <span class="module-grade">Grades K–1</span>
               </span>
             </a>
           </li>
-          <li>
-            <a class="card module" href="/subtraction">
-              <span class="tile" aria-hidden="true">−</span>
+          <li data-grades="1-4">
+            <a class="card module" href="/place-value">
+              <span class="tile tile--sm" aria-hidden="true">1·0</span>
               <span>
-                <span class="module-title">Subtraction</span>
-                <span class="module-desc small muted">Subtract one 2-digit number from another. Answers are never negative.</span>
+                <span class="module-title">Place value</span>
+                <span class="module-desc small muted">Find what a digit is worth and build numbers from expanded form.</span>
+                <span class="module-grade">Grades 1–4</span>
               </span>
             </a>
           </li>
-          <li>
-            <a class="card module" href="/multiplication">
-              <span class="tile" aria-hidden="true">×</span>
+          <li data-grades="3-5">
+            <a class="card module" href="/rounding">
+              <span class="tile" aria-hidden="true">≈</span>
               <span>
-                <span class="module-title">Multiplication</span>
-                <span class="module-desc small muted">Times tables from 2 × 2 to 12 × 12.</span>
-              </span>
-            </a>
-          </li>
-          <li>
-            <a class="card module" href="/division">
-              <span class="tile" aria-hidden="true">÷</span>
-              <span>
-                <span class="module-title">Division</span>
-                <span class="module-desc small muted">Divide by 2 to 12. Every answer is a whole number.</span>
-              </span>
-            </a>
-          </li>
-          <li>
-            <a class="card module" href="/arithmetics">
-              <span class="tile tile--sm" aria-hidden="true">( )</span>
-              <span>
-                <span class="module-title">Mixed operations</span>
-                <span class="module-desc small muted">Expressions that combine all four operations. Answers can be negative.</span>
+                <span class="module-title">Rounding</span>
+                <span class="module-desc small muted">Round whole numbers to the nearest 10, 100 or 1,000, and decimals to a set place.</span>
+                <span class="module-grade">Grades 3–5</span>
               </span>
             </a>
           </li>
         </ul>
       </section>
-      <section class="group" aria-labelledby="g-counting">
-        <h2 id="g-counting" class="h2">Counting</h2>
+      <section class="group" aria-labelledby="g-arithmetic">
+        <h2 id="g-arithmetic" class="h2">Arithmetic</h2>
         <ul class="module-list">
-          <li>
+          <li data-grades="1-2">
+            <a class="card module" href="/addition">
+              <span class="tile" aria-hidden="true">+</span>
+              <span>
+                <span class="module-title">Addition</span>
+                <span class="module-desc small muted">Add two 2-digit numbers.</span>
+                <span class="module-grade">Grades 1–2</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="1-2">
+            <a class="card module" href="/subtraction">
+              <span class="tile" aria-hidden="true">−</span>
+              <span>
+                <span class="module-title">Subtraction</span>
+                <span class="module-desc small muted">Subtract one 2-digit number from another. Answers are never negative.</span>
+                <span class="module-grade">Grades 1–2</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="3-4">
+            <a class="card module" href="/multiplication">
+              <span class="tile" aria-hidden="true">×</span>
+              <span>
+                <span class="module-title">Multiplication</span>
+                <span class="module-desc small muted">Times tables from 2 × 2 to 12 × 12.</span>
+                <span class="module-grade">Grades 3–4</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="3-4">
+            <a class="card module" href="/division">
+              <span class="tile" aria-hidden="true">÷</span>
+              <span>
+                <span class="module-title">Division</span>
+                <span class="module-desc small muted">Divide by 2 to 12. Every answer is a whole number.</span>
+                <span class="module-grade">Grades 3–4</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="3-5">
+            <a class="card module" href="/remainders">
+              <span class="tile" aria-hidden="true">R</span>
+              <span>
+                <span class="module-title">Division with remainders</span>
+                <span class="module-desc small muted">Divide and give the quotient and remainder, like 7 R 3.</span>
+                <span class="module-grade">Grades 3–5</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="4-5">
+            <a class="card module" href="/long-multiplication">
+              <span class="tile tile--sm" aria-hidden="true">12×</span>
+              <span>
+                <span class="module-title">Long multiplication</span>
+                <span class="module-desc small muted">Multiply 2- and 3-digit numbers by splitting into tens and ones.</span>
+                <span class="module-grade">Grades 4–5</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="4-6">
+            <a class="card module" href="/long-division">
+              <span class="tile tile--sm" aria-hidden="true">12÷</span>
+              <span>
+                <span class="module-title">Long division</span>
+                <span class="module-desc small muted">Divide 3- and 4-digit numbers by 1- and 2-digit divisors. Every answer is whole.</span>
+                <span class="module-grade">Grades 4–6</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="5-7">
+            <a class="card module" href="/arithmetics">
+              <span class="tile tile--sm" aria-hidden="true">( )</span>
+              <span>
+                <span class="module-title">Mixed operations</span>
+                <span class="module-desc small muted">Expressions that combine all four operations. Answers can be negative.</span>
+                <span class="module-grade">Grades 5–7</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="group" aria-labelledby="g-numbertheory">
+        <h2 id="g-numbertheory" class="h2">Integers, powers and factors</h2>
+        <ul class="module-list">
+          <li data-grades="6-7">
+            <a class="card module" href="/integers">
+              <span class="tile" aria-hidden="true">±</span>
+              <span>
+                <span class="module-title">Integers</span>
+                <span class="module-desc small muted">Add, subtract, multiply and divide negative numbers, and work with absolute value.</span>
+                <span class="module-grade">Grades 6–7</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="5-8">
+            <a class="card module" href="/exponents">
+              <span class="tile tile--sm" aria-hidden="true"><i>a</i><sup>n</sup></span>
+              <span>
+                <span class="module-title">Exponents</span>
+                <span class="module-desc small muted">Evaluate powers, including negative bases, zero and negative exponents.</span>
+                <span class="module-grade">Grades 5–8</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="6-8">
+            <a class="card module" href="/square-roots">
+              <span class="tile" aria-hidden="true">√</span>
+              <span>
+                <span class="module-title">Square and cube roots</span>
+                <span class="module-desc small muted">Find square roots of perfect squares and cube roots of perfect cubes.</span>
+                <span class="module-grade">Grades 6–8</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="4-6">
+            <a class="card module" href="/gcf-lcm">
+              <span class="tile tile--sm" aria-hidden="true">GCF</span>
+              <span>
+                <span class="module-title">GCF and LCM</span>
+                <span class="module-desc small muted">Find the greatest common factor and least common multiple of two numbers.</span>
+                <span class="module-grade">Grades 4–6</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="5-7">
+            <a class="card module" href="/prime-factorization">
+              <span class="tile tile--sm" aria-hidden="true">2·3</span>
+              <span>
+                <span class="module-title">Prime factorization</span>
+                <span class="module-desc small muted">Write a number as a product of primes.</span>
+                <span class="module-grade">Grades 5–7</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="group" aria-labelledby="g-fractions">
+        <h2 id="g-fractions" class="h2">Fractions and decimals</h2>
+        <ul class="module-list">
+          <li data-grades="3-5">
+            <a class="card module" href="/simplifying-fractions">
+              <span class="tile" aria-hidden="true">½</span>
+              <span>
+                <span class="module-title">Equivalent fractions</span>
+                <span class="module-desc small muted">Simplify fractions and fill in the missing part of an equivalent fraction.</span>
+                <span class="module-grade">Grades 3–5</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="4-5">
+            <a class="card module" href="/mixed-numbers">
+              <span class="tile" aria-hidden="true">1½</span>
+              <span>
+                <span class="module-title">Mixed numbers</span>
+                <span class="module-desc small muted">Convert between improper fractions and mixed numbers.</span>
+                <span class="module-grade">Grades 4–5</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="4-6">
+            <a class="card module" href="/fraction-addition">
+              <span class="tile tile--sm" aria-hidden="true">½+</span>
+              <span>
+                <span class="module-title">Adding and subtracting fractions</span>
+                <span class="module-desc small muted">Like and unlike denominators, and mixed numbers. Give answers in simplest form.</span>
+                <span class="module-grade">Grades 4–6</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="5-6">
+            <a class="card module" href="/fraction-multiplication">
+              <span class="tile tile--sm" aria-hidden="true">½×</span>
+              <span>
+                <span class="module-title">Multiplying and dividing fractions</span>
+                <span class="module-desc small muted">Multiply and divide fractions and whole numbers. Give answers in simplest form.</span>
+                <span class="module-grade">Grades 5–6</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="4-5">
+            <a class="card module" href="/decimal-addition">
+              <span class="tile tile--sm" aria-hidden="true">.5+</span>
+              <span>
+                <span class="module-title">Adding and subtracting decimals</span>
+                <span class="module-desc small muted">Add and subtract decimals to the hundredths.</span>
+                <span class="module-grade">Grades 4–5</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="5-6">
+            <a class="card module" href="/decimal-multiplication">
+              <span class="tile tile--sm" aria-hidden="true">.5×</span>
+              <span>
+                <span class="module-title">Multiplying and dividing decimals</span>
+                <span class="module-desc small muted">Multiply and divide decimals by whole numbers and by other decimals.</span>
+                <span class="module-grade">Grades 5–6</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="6-7">
+            <a class="card module" href="/fraction-decimal-percent">
+              <span class="tile tile--sm" aria-hidden="true">¼%</span>
+              <span>
+                <span class="module-title">Fractions, decimals and percents</span>
+                <span class="module-desc small muted">Convert between fractions, decimals and percents.</span>
+                <span class="module-grade">Grades 6–7</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="group" aria-labelledby="g-ratios">
+        <h2 id="g-ratios" class="h2">Ratios and percents</h2>
+        <ul class="module-list">
+          <li data-grades="6-7">
+            <a class="card module" href="/ratios">
+              <span class="tile tile--sm" aria-hidden="true">2:3</span>
+              <span>
+                <span class="module-title">Ratios and proportions</span>
+                <span class="module-desc small muted">Simplify ratios, find equivalent ratios, share amounts and solve proportions.</span>
+                <span class="module-grade">Grades 6–7</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="6-7">
+            <a class="card module" href="/unit-rates">
+              <span class="tile tile--sm" aria-hidden="true">/h</span>
+              <span>
+                <span class="module-title">Unit rates and speed</span>
+                <span class="module-desc small muted">Find the price of one, speed, distance and time.</span>
+                <span class="module-grade">Grades 6–7</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="6-7">
+            <a class="card module" href="/percentages">
+              <span class="tile" aria-hidden="true">%</span>
+              <span>
+                <span class="module-title">Percentages</span>
+                <span class="module-desc small muted">Find a percent of a number, what percent one number is of another, and the whole.</span>
+                <span class="module-grade">Grades 6–7</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="7-8">
+            <a class="card module" href="/percent-change">
+              <span class="tile tile--sm" aria-hidden="true">±%</span>
+              <span>
+                <span class="module-title">Percent change, discount and tax</span>
+                <span class="module-desc small muted">Percent increase and decrease, sale prices, sales tax and tips.</span>
+                <span class="module-grade">Grades 7–8</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="7-12">
+            <a class="card module" href="/interest">
+              <span class="tile" aria-hidden="true">$</span>
+              <span>
+                <span class="module-title">Simple and compound interest</span>
+                <span class="module-desc small muted">Simple interest with I = Prt and compound interest, rounded to the cent.</span>
+                <span class="module-grade">Grades 7–12</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="group" aria-labelledby="g-geometry">
+        <h2 id="g-geometry" class="h2">Geometry and measurement</h2>
+        <ul class="module-list">
+          <li data-grades="3-6">
+            <a class="card module" href="/unit-conversion">
+              <span class="tile tile--sm" aria-hidden="true">cm</span>
+              <span>
+                <span class="module-title">Unit conversion</span>
+                <span class="module-desc small muted">Convert metric and customary units of length, mass, capacity and time.</span>
+                <span class="module-grade">Grades 3–6</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="3-7">
+            <a class="card module" href="/area-perimeter">
+              <span class="tile" aria-hidden="true">▭</span>
+              <span>
+                <span class="module-title">Area and perimeter</span>
+                <span class="module-desc small muted">Rectangles, squares, triangles, parallelograms and trapezoids.</span>
+                <span class="module-grade">Grades 3–7</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="4-8">
+            <a class="card module" href="/angles">
+              <span class="tile" aria-hidden="true">∠</span>
+              <span>
+                <span class="module-title">Angles</span>
+                <span class="module-desc small muted">Complementary, supplementary, triangle and polygon angles.</span>
+                <span class="module-grade">Grades 4–8</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="5-8">
+            <a class="card module" href="/volume">
+              <span class="tile tile--sm" aria-hidden="true">m³</span>
+              <span>
+                <span class="module-title">Volume and surface area</span>
+                <span class="module-desc small muted">Prisms, cubes, pyramids, cylinders, cones and spheres.</span>
+                <span class="module-grade">Grades 5–8</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="7-8">
+            <a class="card module" href="/circles">
+              <span class="tile tile--sm" aria-hidden="true">π<i>r</i>²</span>
+              <span>
+                <span class="module-title">Circles</span>
+                <span class="module-desc small muted">Circumference and area from the radius or diameter.</span>
+                <span class="module-grade">Grades 7–8</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="8-9">
+            <a class="card module" href="/pythagorean-theorem">
+              <span class="tile" aria-hidden="true">⊿</span>
+              <span>
+                <span class="module-title">Pythagorean theorem</span>
+                <span class="module-desc small muted">Find a missing side of a right triangle with a² + b² = c².</span>
+                <span class="module-grade">Grades 8–9</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="6-10">
+            <a class="card module" href="/coordinate-geometry">
+              <span class="tile tile--sm" aria-hidden="true">(<i>x</i>,<i>y</i>)</span>
+              <span>
+                <span class="module-title">Coordinate geometry</span>
+                <span class="module-desc small muted">Distance, midpoint and slope between two points.</span>
+                <span class="module-grade">Grades 6–10</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="group" aria-labelledby="g-stats">
+        <h2 id="g-stats" class="h2">Statistics and probability</h2>
+        <ul class="module-list">
+          <li data-grades="6-7">
+            <a class="card module" href="/mean-median-mode">
+              <span class="tile tile--sm" aria-hidden="true">avg</span>
+              <span>
+                <span class="module-title">Mean, median, mode and range</span>
+                <span class="module-desc small muted">Find the center and spread of a small data set.</span>
+                <span class="module-grade">Grades 6–7</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="7-12">
+            <a class="card module" href="/probability">
+              <span class="tile tile--sm" aria-hidden="true"><i>P</i>(A)</span>
+              <span>
+                <span class="module-title">Probability</span>
+                <span class="module-desc small muted">Marbles, dice and coins, including two events. Give answers as fractions.</span>
+                <span class="module-grade">Grades 7–12</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="10-12">
             <a class="card module" href="/combination">
               <span class="tile tile--sm" aria-hidden="true"><i>n</i>C<i>r</i></span>
               <span>
                 <span class="module-title">Combinations</span>
                 <span class="module-desc small muted">Count the ways to choose items when order does not matter. Sets of 4 to 9.</span>
+                <span class="module-grade">Grades 10–12</span>
               </span>
             </a>
           </li>
-          <li>
+          <li data-grades="10-12">
             <a class="card module" href="/permutation">
               <span class="tile tile--sm" aria-hidden="true"><i>n</i>P<i>r</i></span>
               <span>
                 <span class="module-title">Permutations</span>
                 <span class="module-desc small muted">Count the ways to arrange items when order matters. Sets of 3 to 8.</span>
+                <span class="module-grade">Grades 10–12</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="group" aria-labelledby="g-algebra">
+        <h2 id="g-algebra" class="h2">Algebra</h2>
+        <ul class="module-list">
+          <li data-grades="6-7">
+            <a class="card module" href="/evaluating-expressions">
+              <span class="tile tile--sm" aria-hidden="true">3<i>x</i></span>
+              <span>
+                <span class="module-title">Evaluating expressions</span>
+                <span class="module-desc small muted">Substitute values for variables and simplify.</span>
+                <span class="module-grade">Grades 6–7</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="6-7">
+            <a class="card module" href="/one-step-equations">
+              <span class="tile tile--sm" aria-hidden="true"><i>x</i>+1</span>
+              <span>
+                <span class="module-title">One-step equations</span>
+                <span class="module-desc small muted">Solve x + a = b, x − a = b, ax = b and x/a = b.</span>
+                <span class="module-grade">Grades 6–7</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="7-8">
+            <a class="card module" href="/two-step-equations">
+              <span class="tile tile--sm" aria-hidden="true">2<i>x</i>+1</span>
+              <span>
+                <span class="module-title">Two-step equations</span>
+                <span class="module-desc small muted">Solve equations like 3x + 5 = 20 and x/4 − 2 = 3.</span>
+                <span class="module-grade">Grades 7–8</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="8-9">
+            <a class="card module" href="/multi-step-equations">
+              <span class="tile tile--sm" aria-hidden="true"><i>x</i>=<i>x</i></span>
+              <span>
+                <span class="module-title">Multi-step equations</span>
+                <span class="module-desc small muted">Variables on both sides, brackets and like terms.</span>
+                <span class="module-grade">Grades 8–9</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="7-9">
+            <a class="card module" href="/inequalities">
+              <span class="tile" aria-hidden="true">&lt;</span>
+              <span>
+                <span class="module-title">Inequalities</span>
+                <span class="module-desc small muted">Solve linear inequalities, flipping the sign when dividing by a negative.</span>
+                <span class="module-grade">Grades 7–9</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="8-9">
+            <a class="card module" href="/linear-functions">
+              <span class="tile tile--sm" aria-hidden="true"><i>mx</i>+<i>b</i></span>
+              <span>
+                <span class="module-title">Linear functions</span>
+                <span class="module-desc small muted">Slope, intercepts and values of y = mx + b and Ax + By = C.</span>
+                <span class="module-grade">Grades 8–9</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="8-9">
+            <a class="card module" href="/systems-of-equations">
+              <span class="tile tile--sm" aria-hidden="true">{ }</span>
+              <span>
+                <span class="module-title">Systems of equations</span>
+                <span class="module-desc small muted">Solve two linear equations in x and y by elimination.</span>
+                <span class="module-grade">Grades 8–9</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="8-9">
+            <a class="card module" href="/exponent-rules">
+              <span class="tile tile--sm" aria-hidden="true"><i>x</i><sup>n</sup></span>
+              <span>
+                <span class="module-title">Exponent rules</span>
+                <span class="module-desc small muted">Product, quotient and power rules, with zero and negative exponents.</span>
+                <span class="module-grade">Grades 8–9</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="8-9">
+            <a class="card module" href="/scientific-notation">
+              <span class="tile tile--sm" aria-hidden="true">10<sup>n</sup></span>
+              <span>
+                <span class="module-title">Scientific notation</span>
+                <span class="module-desc small muted">Convert to and from a × 10ⁿ, and multiply numbers in scientific notation.</span>
+                <span class="module-grade">Grades 8–9</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="9-10">
+            <a class="card module" href="/polynomials">
+              <span class="tile tile--sm" aria-hidden="true"><i>x</i>²+</span>
+              <span>
+                <span class="module-title">Polynomials</span>
+                <span class="module-desc small muted">Add, subtract and multiply polynomials. Type answers like 3x^2 − 2x + 5.</span>
+                <span class="module-grade">Grades 9–10</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="9-10">
+            <a class="card module" href="/factoring">
+              <span class="tile tile--sm" aria-hidden="true">()()</span>
+              <span>
+                <span class="module-title">Factoring quadratics</span>
+                <span class="module-desc small muted">Factor trinomials, differences of squares and perfect squares.</span>
+                <span class="module-grade">Grades 9–10</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="9-10">
+            <a class="card module" href="/quadratic-equations">
+              <span class="tile tile--sm" aria-hidden="true"><i>x</i>²</span>
+              <span>
+                <span class="module-title">Quadratic equations</span>
+                <span class="module-desc small muted">Solve by factoring, square roots and the quadratic formula.</span>
+                <span class="module-grade">Grades 9–10</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="9-10">
+            <a class="card module" href="/radicals">
+              <span class="tile tile--sm" aria-hidden="true"><i>a</i>√<i>b</i></span>
+              <span>
+                <span class="module-title">Simplifying radicals</span>
+                <span class="module-desc small muted">Simplify square roots, multiply them and combine like radicals.</span>
+                <span class="module-grade">Grades 9–10</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="9-11">
+            <a class="card module" href="/functions">
+              <span class="tile tile--sm" aria-hidden="true"><i>f</i>(<i>x</i>)</span>
+              <span>
+                <span class="module-title">Functions</span>
+                <span class="module-desc small muted">Evaluate functions, compose them and use inverses.</span>
+                <span class="module-grade">Grades 9–11</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="group" aria-labelledby="g-advanced">
+        <h2 id="g-advanced" class="h2">Advanced algebra and trigonometry</h2>
+        <ul class="module-list">
+          <li data-grades="10-12">
+            <a class="card module" href="/logarithms">
+              <span class="tile tile--sm" aria-hidden="true">log</span>
+              <span>
+                <span class="module-title">Logarithms</span>
+                <span class="module-desc small muted">Evaluate logs, use log rules and solve exponential equations.</span>
+                <span class="module-grade">Grades 10–12</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="9-12">
+            <a class="card module" href="/sequences">
+              <span class="tile tile--sm" aria-hidden="true"><i>a</i><sub>n</sub></span>
+              <span>
+                <span class="module-title">Sequences and series</span>
+                <span class="module-desc small muted">Arithmetic and geometric sequences: next term, nth term and sums.</span>
+                <span class="module-grade">Grades 9–12</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="10-12">
+            <a class="card module" href="/complex-numbers">
+              <span class="tile" aria-hidden="true"><i>i</i></span>
+              <span>
+                <span class="module-title">Complex numbers</span>
+                <span class="module-desc small muted">Add, subtract, multiply and divide complex numbers, and powers of i.</span>
+                <span class="module-grade">Grades 10–12</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="9-11">
+            <a class="card module" href="/trigonometry">
+              <span class="tile tile--sm" aria-hidden="true">sin</span>
+              <span>
+                <span class="module-title">Right-triangle trigonometry</span>
+                <span class="module-desc small muted">Use sine, cosine and tangent to find sides and angles.</span>
+                <span class="module-grade">Grades 9–11</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="10-12">
+            <a class="card module" href="/unit-circle">
+              <span class="tile" aria-hidden="true">π</span>
+              <span>
+                <span class="module-title">Unit circle and radians</span>
+                <span class="module-desc small muted">Exact sine, cosine and tangent values, and converting degrees and radians.</span>
+                <span class="module-grade">Grades 10–12</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="11-12">
+            <a class="card module" href="/matrices">
+              <span class="tile tile--sm" aria-hidden="true">[ ]</span>
+              <span>
+                <span class="module-title">Matrices</span>
+                <span class="module-desc small muted">2 × 2 and 3 × 3 determinants and 2 × 2 matrix multiplication.</span>
+                <span class="module-grade">Grades 11–12</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="group" aria-labelledby="g-calculus">
+        <h2 id="g-calculus" class="h2">Calculus</h2>
+        <ul class="module-list">
+          <li data-grades="11-12">
+            <a class="card module" href="/limits">
+              <span class="tile tile--sm" aria-hidden="true">lim</span>
+              <span>
+                <span class="module-title">Limits</span>
+                <span class="module-desc small muted">Direct substitution, removable discontinuities and limits at infinity.</span>
+                <span class="module-grade">Grades 11–12</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="11-12">
+            <a class="card module" href="/derivatives">
+              <span class="tile tile--sm" aria-hidden="true"><i>f</i>′</span>
+              <span>
+                <span class="module-title">Derivatives</span>
+                <span class="module-desc small muted">Power rule for polynomials, slopes of tangents and the chain rule.</span>
+                <span class="module-grade">Grades 11–12</span>
+              </span>
+            </a>
+          </li>
+          <li data-grades="11-12">
+            <a class="card module" href="/integrals">
+              <span class="tile" aria-hidden="true">∫</span>
+              <span>
+                <span class="module-title">Integrals</span>
+                <span class="module-desc small muted">Antiderivatives of polynomials and definite integrals.</span>
+                <span class="module-grade">Grades 11–12</span>
               </span>
             </a>
           </li>
@@ -127,13 +731,22 @@
       var input = document.getElementById('search');
       var empty = document.getElementById('empty');
       var groups = document.querySelectorAll('.group');
-      input.addEventListener('input', function () {
+      var chips = document.querySelectorAll('.chip');
+      var band = '';
+
+      function inBand(li) {
+        if (!band) return true;
+        var b = band.split('-'), g = li.getAttribute('data-grades').split('-');
+        return +g[0] <= +b[1] && +g[1] >= +b[0];
+      }
+
+      function apply() {
         var term = input.value.trim().toLowerCase();
         var shown = 0;
         groups.forEach(function (group) {
           var visible = 0;
           group.querySelectorAll('li').forEach(function (li) {
-            var match = li.textContent.toLowerCase().indexOf(term) !== -1;
+            var match = inBand(li) && li.textContent.toLowerCase().indexOf(term) !== -1;
             li.hidden = !match;
             if (match) visible++;
           });
@@ -141,8 +754,28 @@
           shown += visible;
         });
         empty.hidden = shown > 0;
-        empty.textContent = shown ? '' : 'No modules match \u201c' + input.value.trim() + '\u201d.';
+        empty.textContent = shown ? '' : term
+          ? 'No modules match \u201c' + input.value.trim() + '\u201d' + (band ? ' in this grade band.' : '.')
+          : 'No modules in this grade band.';
+      }
+
+      function setBand(value, push) {
+        band = value;
+        chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c.getAttribute('data-band') === band)); });
+        if (push && window.history && history.replaceState) {
+          var url = band ? '?grade=' + band : location.pathname;
+          try { history.replaceState(null, '', url); } catch (e) {}
+        }
+        apply();
+      }
+
+      chips.forEach(function (c) {
+        c.addEventListener('click', function () { setBand(c.getAttribute('data-band'), true); });
       });
+      input.addEventListener('input', apply);
+
+      var match = /[?&]grade=(\d+-\d+)/.exec(location.search);
+      if (match && document.querySelector('.chip[data-band="' + match[1] + '"]')) setBand(match[1], false);
     })();
   </script>
 </body>

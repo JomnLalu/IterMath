@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Multi-step equations practice · IterMath</title>
+  <meta name="description" content="Solve equations with variables on both sides, brackets and like terms to collect. Instant feedback and a worked solution for every miss.">
+  <link rel="canonical" href="https://itermath.jomontolalu.com/multi-step-equations">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IterMath">
+  <meta property="og:title" content="Multi-step equations practice · IterMath">
+  <meta property="og:description" content="Solve equations with variables on both sides, brackets and like terms to collect. Instant feedback and a worked solution for every miss.">
+  <meta property="og:url" content="https://itermath.jomontolalu.com/multi-step-equations">
+  <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="container container--narrow topbar">
+    <a class="back" href="/" aria-label="All modules"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><img src="/assets/itermath-logo.svg" alt="" width="104" height="37"></a>
+  </header>
+
+  <main class="container container--narrow">
+    <div class="practice-header">
+      <p class="eyebrow small muted">Algebra · Grades 8–9</p>
+      <h1 class="h1">Multi-step equations</h1>
+      <p class="lead">Solve equations with variables on both sides, brackets and like terms to collect.</p>
+    </div>
+
+    <section class="card panel" aria-label="Exercise">
+      <p id="question" class="question" aria-live="polite"></p>
+      <form id="form" novalidate autocomplete="off">
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <div class="answer-row">
+          <input id="answer" class="input" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="x =" aria-describedby="hint error">
+          <button id="action" class="btn" type="submit">Check</button>
+        </div>
+        <p id="hint" class="field-hint small muted" hidden></p>
+        <p id="error" class="field-error" role="alert" hidden></p>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="/assets/practice.js"></script>
+  <script>
+    (function (M) {
+      M.practice({
+        input: 'number',
+        generate: function () {
+          var n = M.num, x = M.v('x'), xs = M.randNZ(-9, 10), t = M.rand(1, 3), eq, rows, A, B;
+          var lin = function (p, q) { return M.terms([[p, x], [q, '']]); };
+          if (t === 1) {
+            var a, c; do { a = M.randNZ(-9, 9); c = M.randNZ(-9, 9); } while (a === c);
+            var b = M.randNZ(-15, 15), d = a * xs + b - c * xs;
+            eq = lin(a, b) + ' = ' + lin(c, d);
+            A = a - c; B = d - b;
+            rows = [[lin(a, 0) + ' − ' + (c < 0 ? '(' + lin(c, 0) + ')' : lin(c, 0)), '= ' + n(d) + ' − ' + M.operand(b)]];
+          } else if (t === 2) {
+            var m = M.rand(2, 6), p = M.randNZ(-9, 9), q = M.randNZ(-6, 6);
+            if (m + q === 0) q++;
+            var r = m * (xs + p) + q * xs;
+            eq = m + '(' + lin(1, p) + ') ' + (q < 0 ? '− ' + (q === -1 ? '' : -q) : '+ ' + (q === 1 ? '' : q)) + x + ' = ' + n(r);
+            rows = [[lin(m, m * p) + (q < 0 ? ' − ' + (q === -1 ? '' : -q) : ' + ' + (q === 1 ? '' : q)) + x, '= ' + n(r)], [lin(m + q, m * p), '= ' + n(r)]];
+            A = m + q; B = r - m * p;
+          } else {
+            var m1, m2; do { m1 = M.rand(2, 6); m2 = M.rand(2, 6); } while (m1 === m2);
+            var p1 = M.randNZ(-8, 8), p2 = m1 * (xs + p1) / m2 - xs;
+            if (p2 !== Math.round(p2) || p2 === 0) { p1 = M.randNZ(-8, 8); m2 = 1; p2 = m1 * (xs + p1) - xs; }
+            var left = m1 + '(' + lin(1, p1) + ')', right = (m2 === 1 ? '' : m2) + (m2 === 1 ? lin(1, p2) : '(' + lin(1, p2) + ')');
+            eq = left + ' = ' + right;
+            rows = [[lin(m1, m1 * p1), '= ' + lin(m2, m2 * p2)]];
+            A = m1 - m2; B = m2 * p2 - m1 * p1;
+          }
+          rows.push([lin(A, 0), '= ' + n(B)]);
+          rows.push([x, '= ' + (A === 1 ? '' : M.frac(n(B), n(A)) + ' = ') + '<strong>' + n(xs) + '</strong>']);
+          return { prompt: 'Solve for ' + x + '.', question: eq, ask: false, answer: xs, solution: M.steps([[eq, '']].concat(rows)) + M.note('Expand brackets, collect the ' + x + ' terms on one side and the numbers on the other.') };
+        }
+      });
+    })(IterMath);
+  </script>
+</body>
+</html>
