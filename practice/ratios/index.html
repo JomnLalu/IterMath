@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ratios and proportions practice · IterMath</title>
+  <meta name="description" content="Simplify ratios, find equivalent ratios, share an amount in a ratio and solve proportions. Instant feedback and a worked solution for every miss.">
+  <link rel="canonical" href="https://itermath.jomontolalu.com/practice/ratios/">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IterMath">
+  <meta property="og:title" content="Ratios and proportions practice · IterMath">
+  <meta property="og:description" content="Simplify ratios, find equivalent ratios, share an amount in a ratio and solve proportions. Instant feedback and a worked solution for every miss.">
+  <meta property="og:url" content="https://itermath.jomontolalu.com/practice/ratios/">
+  <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <header class="container container--narrow topbar">
+    <a class="back" href="../../" aria-label="All modules"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><img src="../../assets/itermath-logo.svg" alt="" width="104" height="37"></a>
+  </header>
+
+  <main class="container container--narrow">
+    <div class="practice-header">
+      <p class="eyebrow small muted">Ratios and percents · Grades 6–7</p>
+      <h1 class="h1">Ratios and proportions</h1>
+      <p class="lead">Simplify ratios, find equivalent ratios, share an amount in a ratio and solve proportions.</p>
+    </div>
+
+    <section class="card panel" aria-label="Exercise">
+      <p id="question" class="question" aria-live="polite"></p>
+      <form id="form" novalidate autocomplete="off">
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <div class="answer-row">
+          <input id="answer" class="input" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="Answer" aria-describedby="hint error">
+          <button id="action" class="btn" type="submit">Check</button>
+        </div>
+        <p id="hint" class="field-hint small muted" hidden></p>
+        <p id="error" class="field-error" role="alert" hidden></p>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="../../assets/practice.js"></script>
+  <script>
+    (function (M) {
+      M.practice({
+        input: 'number',
+        generate: function () {
+          var p, q, k = M.rand(2, 12), t = M.rand(1, 4), blank = '<span class="muted">?</span>';
+          do { p = M.rand(1, 9); q = M.rand(1, 9); } while (p === q || M.gcd(p, q) !== 1);
+          if (t === 1) {
+            return {
+              prompt: 'Simplify the ratio.', question: p * k + ' : ' + q * k, ask: false,
+              answer: p + ':' + q, sample: p + ':' + q, display: p + ' : ' + q,
+              placeholder: '3 : 4', hint: 'Type it like 3:4.',
+              check: function (raw) {
+                var m = /^(\d+)\s*(?::|to|\/)\s*(\d+)$/i.exec(raw.trim());
+                if (!m) return 'Type the ratio like 3:4.';
+                var a = parseInt(m[1], 10), b = parseInt(m[2], 10);
+                if (a * q !== b * p) return false;
+                return a === p ? true : 'That ratio is equal. Now simplify it fully.';
+              },
+              solution: M.steps([[p * k + ' : ' + q * k, '= ' + p * k + ' ÷ ' + k + ' : ' + q * k + ' ÷ ' + k], ['', '= <strong>' + p + ' : ' + q + '</strong>']]) +
+                M.note('Divide both parts by their greatest common factor, ' + k + '.')
+            };
+          }
+          if (t === 2) {
+            var first = Math.random() < .5;
+            return {
+              prompt: 'Find the missing number.',
+              question: p + ' : ' + q + ' = ' + (first ? blank + ' : ' + q * k : p * k + ' : ' + blank), ask: false,
+              answer: first ? p * k : q * k, hint: '',
+              solution: M.steps([[p + ' : ' + q, '= ' + p + ' × ' + k + ' : ' + q + ' × ' + k], ['', '= ' + (first ? '<strong>' + p * k + '</strong> : ' + q * k : p * k + ' : <strong>' + q * k + '</strong>')]]) +
+                M.note('Both parts are multiplied by the same number, ' + k + '.')
+            };
+          }
+          if (t === 3) {
+            var total = (p + q) * k, big = Math.random() < .5;
+            var share = (big ? Math.max(p, q) : Math.min(p, q)) * k;
+            return {
+              prompt: 'Share ' + total + ' in the ratio ' + p + ' : ' + q + '.',
+              question: (big ? 'Larger' : 'Smaller') + ' share', answer: share, hint: '',
+              solution: M.steps([
+                ['Parts', '= ' + p + ' + ' + q + ' = ' + (p + q)],
+                ['One part', '= ' + total + ' ÷ ' + (p + q) + ' = ' + k],
+                [(big ? 'Larger' : 'Smaller') + ' share', '= ' + (big ? Math.max(p, q) : Math.min(p, q)) + ' × ' + k + ' = <strong>' + share + '</strong>']
+              ])
+            };
+          }
+          var x = M.v('x'), c = M.rand(2, 9), b = M.rand(1, 12), a = c * M.rand(2, 6), xs = b * a / c;
+          return {
+            prompt: 'Solve for ' + x + '.', question: M.frac(x, a) + ' = ' + M.frac(b, c), ask: false,
+            answer: xs, placeholder: 'x =', hint: '',
+            solution: M.steps([[x, '= ' + M.frac(b + ' × ' + a, c)], ['', '= ' + M.frac(b * a, c)], ['', '= <strong>' + xs + '</strong>']]) +
+              M.note('Multiply both sides by ' + a + ' (or cross-multiply).')
+          };
+        }
+      });
+    })(IterMath);
+  </script>
+</body>
+</html>

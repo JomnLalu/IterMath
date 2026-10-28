@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Inequalities practice · IterMath</title>
+  <meta name="description" content="Solve linear inequalities. Remember to flip the sign when you multiply or divide by a negative. Instant feedback and a worked solution for every miss.">
+  <link rel="canonical" href="https://itermath.jomontolalu.com/practice/inequalities/">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IterMath">
+  <meta property="og:title" content="Inequalities practice · IterMath">
+  <meta property="og:description" content="Solve linear inequalities. Remember to flip the sign when you multiply or divide by a negative. Instant feedback and a worked solution for every miss.">
+  <meta property="og:url" content="https://itermath.jomontolalu.com/practice/inequalities/">
+  <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <header class="container container--narrow topbar">
+    <a class="back" href="../../" aria-label="All modules"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><img src="../../assets/itermath-logo.svg" alt="" width="104" height="37"></a>
+  </header>
+
+  <main class="container container--narrow">
+    <div class="practice-header">
+      <p class="eyebrow small muted">Algebra · Grades 7–9</p>
+      <h1 class="h1">Inequalities</h1>
+      <p class="lead">Solve linear inequalities. Remember to flip the sign when you multiply or divide by a negative.</p>
+    </div>
+
+    <section class="card panel" aria-label="Exercise">
+      <p id="question" class="question" aria-live="polite"></p>
+      <form id="form" novalidate autocomplete="off">
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <div class="answer-row">
+          <input id="answer" class="input" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="x < 3" aria-describedby="hint error">
+          <button id="action" class="btn" type="submit">Check</button>
+        </div>
+        <p id="hint" class="field-hint small muted">Type like x > 3 or x <= -2.</p>
+        <p id="error" class="field-error" role="alert" hidden></p>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="../../assets/practice.js"></script>
+  <script>
+    (function (M) {
+      M.practice({
+        input: 'number',
+        generate: function () {
+          var n = M.num, x = M.v('x'), ops = ['<', '>', '≤', '≥'], flip = { '<': '>', '>': '<', '≤': '≥', '≥': '≤' };
+          var op = M.pick(ops), x0 = M.rand(-9, 9), a = M.randNZ(-8, 8), b = M.randNZ(-15, 15);
+          if (a === 1 && Math.random() < .5) a = -3;
+          var c = a * x0 + b, fin = a < 0 ? flip[op] : op, esc = function (s) { return s.replace('<', '&lt;').replace('>', '&gt;'); };
+          var lhs = M.terms([[a, x], [b, '']]);
+          var rows = [[lhs, esc(op) + ' ' + n(c)], [M.terms([[a, x]]), esc(op) + ' ' + n(c - b)]];
+          if (a !== 1) rows.push([x, esc(fin) + ' <strong>' + n(x0) + '</strong>']);
+          else rows[1][1] = esc(op) + ' <strong>' + n(x0) + '</strong>';
+          return {
+            prompt: 'Solve for ' + x + '.', question: lhs + ' ' + esc(op) + ' ' + n(c), ask: false,
+            answer: 'x' + fin + x0, accept: [x0 + flip[fin] + 'x'],
+            display: x + ' ' + esc(fin) + ' ' + n(x0),
+            solution: M.steps(rows) + M.note(a < 0 ? 'Dividing both sides by ' + n(a) + ' flips the inequality sign.' : 'Dividing by a positive number keeps the sign the same.')
+          };
+        }
+      });
+    })(IterMath);
+  </script>
+</body>
+</html>

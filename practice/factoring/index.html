@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Factoring quadratics practice · IterMath</title>
+  <meta name="description" content="Factor quadratic trinomials, differences of squares and perfect squares. Instant feedback and a worked solution for every miss.">
+  <link rel="canonical" href="https://itermath.jomontolalu.com/practice/factoring/">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IterMath">
+  <meta property="og:title" content="Factoring quadratics practice · IterMath">
+  <meta property="og:description" content="Factor quadratic trinomials, differences of squares and perfect squares. Instant feedback and a worked solution for every miss.">
+  <meta property="og:url" content="https://itermath.jomontolalu.com/practice/factoring/">
+  <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <header class="container container--narrow topbar">
+    <a class="back" href="../../" aria-label="All modules"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><img src="../../assets/itermath-logo.svg" alt="" width="104" height="37"></a>
+  </header>
+
+  <main class="container container--narrow">
+    <div class="practice-header">
+      <p class="eyebrow small muted">Algebra · Grades 9–10</p>
+      <h1 class="h1">Factoring quadratics</h1>
+      <p class="lead">Factor quadratic trinomials, differences of squares and perfect squares.</p>
+    </div>
+
+    <section class="card panel" aria-label="Exercise">
+      <p id="question" class="question" aria-live="polite"></p>
+      <form id="form" novalidate autocomplete="off">
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <div class="answer-row">
+          <input id="answer" class="input" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="(x + 2)(x - 5)" aria-describedby="hint error">
+          <button id="action" class="btn" type="submit">Check</button>
+        </div>
+        <p id="hint" class="field-hint small muted">Type brackets, like (x + 2)(x - 5) or (x - 3)^2.</p>
+        <p id="error" class="field-error" role="alert" hidden></p>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="../../assets/practice.js"></script>
+  <script>
+    (function (M) {
+      M.practice({
+        input: 'number',
+        generate: function () {
+          var P = M.poly, x = M.v('x'), t = M.rand(1, 4), p, q, k = 1, coeffs, fact, sample, note;
+          if (t === 1) {
+            do { p = M.randNZ(-9, 9); q = M.randNZ(-9, 9); } while (p + q === 0 || p === q);
+            coeffs = [1, p + q, p * q];
+            fact = '(' + P([1, p]) + ')(' + P([1, q]) + ')'; sample = '(x' + (p < 0 ? p : '+' + p) + ')(x' + (q < 0 ? q : '+' + q) + ')';
+            note = 'Find two numbers that multiply to ' + M.num(p * q) + ' and add to ' + M.num(p + q) + ': ' + M.num(p) + ' and ' + M.num(q) + '.';
+          } else if (t === 2) {
+            var a = M.rand(1, 12);
+            coeffs = [1, 0, -a * a];
+            fact = '(' + P([1, a]) + ')(' + P([1, -a]) + ')'; sample = '(x+' + a + ')(x-' + a + ')';
+            note = 'A difference of squares: ' + M.pow('<i>a</i>', 2) + ' − ' + M.pow('<i>b</i>', 2) + ' = (<i>a</i> + <i>b</i>)(<i>a</i> − <i>b</i>).';
+          } else if (t === 3) {
+            p = M.randNZ(-9, 9);
+            coeffs = [1, 2 * p, p * p];
+            fact = M.pow('(' + P([1, p]) + ')', 2); sample = '(x' + (p < 0 ? p : '+' + p) + ')^2';
+            note = 'A perfect square: half of ' + M.num(2 * p) + ' is ' + M.num(p) + ', and ' + M.pow(M.operand(p), 2) + ' = ' + p * p + '.';
+          } else {
+            k = M.rand(2, 3);
+            do { p = M.randNZ(-7, 7); q = M.randNZ(-7, 7); } while (M.gcd(k, p) !== 1 || k * q + p === 0);
+            coeffs = [k, k * q + p, p * q];
+            fact = '(' + P([k, p]) + ')(' + P([1, q]) + ')'; sample = '(' + k + 'x' + (p < 0 ? p : '+' + p) + ')(x' + (q < 0 ? q : '+' + q) + ')';
+            note = 'Find two numbers that multiply to ' + k + ' × ' + M.operand(p * q) + ' = ' + M.num(k * p * q) + ' and add to ' + M.num(k * q + p) + ', then split the middle term.';
+          }
+          return {
+            prompt: 'Factor completely.', question: P(coeffs), ask: false,
+            answer: sample, sample: sample, check: M.factorCheck(coeffs), display: fact,
+            solution: M.steps([[P(coeffs), '= <strong>' + fact + '</strong>']]) + M.note(note + ' Check by expanding.')
+          };
+        }
+      });
+    })(IterMath);
+  </script>
+</body>
+</html>

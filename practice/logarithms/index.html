@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Logarithms practice · IterMath</title>
+  <meta name="description" content="Evaluate logarithms, use the log rules and solve simple exponential equations. Instant feedback and a worked solution for every miss.">
+  <link rel="canonical" href="https://itermath.jomontolalu.com/practice/logarithms/">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IterMath">
+  <meta property="og:title" content="Logarithms practice · IterMath">
+  <meta property="og:description" content="Evaluate logarithms, use the log rules and solve simple exponential equations. Instant feedback and a worked solution for every miss.">
+  <meta property="og:url" content="https://itermath.jomontolalu.com/practice/logarithms/">
+  <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <header class="container container--narrow topbar">
+    <a class="back" href="../../" aria-label="All modules"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><img src="../../assets/itermath-logo.svg" alt="" width="104" height="37"></a>
+  </header>
+
+  <main class="container container--narrow">
+    <div class="practice-header">
+      <p class="eyebrow small muted">Advanced algebra and trigonometry · Grades 10–12</p>
+      <h1 class="h1">Logarithms</h1>
+      <p class="lead">Evaluate logarithms, use the log rules and solve simple exponential equations.</p>
+    </div>
+
+    <section class="card panel" aria-label="Exercise">
+      <p id="question" class="question" aria-live="polite"></p>
+      <form id="form" novalidate autocomplete="off">
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <div class="answer-row">
+          <input id="answer" class="input" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="Answer" aria-describedby="hint error">
+          <button id="action" class="btn" type="submit">Check</button>
+        </div>
+        <p id="hint" class="field-hint small muted">Fractions are fine, like 3/2.</p>
+        <p id="error" class="field-error" role="alert" hidden></p>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="../../assets/practice.js"></script>
+  <script>
+    (function (M) {
+      M.practice({
+        input: 'number',
+        generate: function () {
+          var n = M.num, x = M.v('x'), t = M.rand(1, 7);
+          var max = { 2: 10, 3: 6, 4: 5, 5: 4, 10: 6 }, b = M.pick([2, 3, 4, 5, 10]), k = M.rand(0, max[b]), N = Math.pow(b, k);
+          var log = function (base, arg) { return base === 10 ? 'log ' + arg : 'log<sub>' + base + '</sub> ' + arg; };
+          if (t === 1) return { question: log(b, N), answer: k, hint: '', solution: M.steps([[log(b, N), '= ' + log(b, M.pow(b, k))], ['', '= <strong>' + k + '</strong>']]) + M.note(M.pow(b, k) + ' = ' + N + ', so the log is ' + k + '.') };
+          if (t === 2) {
+            k = M.rand(1, Math.min(max[b], 4)); N = Math.pow(b, k);
+            return { question: log(b, M.frac(1, N)), answer: -k, hint: '', solution: M.steps([[log(b, M.frac(1, N)), '= ' + log(b, M.pow(b, n(-k)))], ['', '= <strong>' + n(-k) + '</strong>']]) };
+          }
+          if (t === 3) { k = M.rand(1, 9); return { question: 'ln ' + M.pow('<i>e</i>', k), answer: k, hint: '', solution: M.steps([['ln ' + M.pow('<i>e</i>', k), '= ' + k + ' ln <i>e</i> = <strong>' + k + '</strong>']]) + M.note('ln means log base <i>e</i>, and ln <i>e</i> = 1.') }; }
+          if (t === 4) {
+            k = M.rand(1, max[b]); N = Math.pow(b, k);
+            return { prompt: 'Solve for ' + x + '.', question: M.pow(b, x) + ' = ' + N, ask: false, answer: k, placeholder: 'x =', hint: '', solution: M.steps([[M.pow(b, x), '= ' + M.pow(b, k)], [x, '= <strong>' + k + '</strong>']]) + M.note('Write both sides as powers of ' + b + ', then match the exponents.') };
+          }
+          if (t === 5) {
+            k = M.rand(1, max[b]); N = Math.pow(b, k);
+            return { prompt: 'Solve for ' + x + '.', question: log(b, x) + ' = ' + k, ask: false, answer: N, placeholder: 'x =', hint: '', solution: M.steps([[x, '= ' + M.pow(b, k)], ['', '= <strong>' + N + '</strong>']]) + M.note(log(b, x) + ' = ' + k + ' means ' + M.pow(b, k) + ' = ' + x + '.') };
+          }
+          if (t === 6) {
+            var i = M.rand(1, 3), j = M.rand(1, 3), add = Math.random() < .5;
+            b = M.pick([2, 3, 5]);
+            var A = Math.pow(b, i + (add ? 0 : j)), B = Math.pow(b, j), ans = add ? i + j : i;
+            var q = log(b, A) + (add ? ' + ' : ' − ') + log(b, B);
+            return { question: q, answer: ans, hint: '', solution: M.steps([[q, '= ' + log(b, '(' + A + (add ? ' × ' : ' ÷ ') + B + ')')], ['', '= ' + log(b, add ? A * B : A / B)], ['', '= <strong>' + ans + '</strong>']]) + M.note(add ? 'Adding logs multiplies their arguments.' : 'Subtracting logs divides their arguments.') };
+          }
+          var pairs = [[4, 8, 3, 2], [8, 4, 2, 3], [9, 27, 3, 2], [27, 9, 2, 3], [4, 32, 5, 2], [8, 2, 1, 3], [16, 8, 3, 4], [25, 125, 3, 2]];
+          var pr = M.pick(pairs), prime = { 4: 2, 8: 2, 16: 2, 9: 3, 27: 3, 25: 5 }[pr[0]];
+          return {
+            question: log(pr[0], pr[1]), answer: M.Q(pr[2], pr[3]),
+            solution: M.steps([[log(pr[0], pr[1]), '= ' + M.frac('log ' + pr[1], 'log ' + pr[0])], ['', '= ' + M.frac(pr[2] + ' log ' + prime, pr[3] + ' log ' + prime)], ['', '= <strong>' + M.frac(pr[2], pr[3]) + '</strong>']]) +
+              M.note('Write both numbers as powers of ' + prime + ': ' + pr[0] + ' = ' + M.pow(prime, pr[3]) + ' and ' + pr[1] + ' = ' + M.pow(prime, pr[2]) + '.')
+          };
+        }
+      });
+    })(IterMath);
+  </script>
+</body>
+</html>

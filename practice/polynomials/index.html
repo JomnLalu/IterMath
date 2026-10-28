@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Polynomials practice · IterMath</title>
+  <meta name="description" content="Add, subtract and multiply polynomials, and expand brackets. Instant feedback and a worked solution for every miss.">
+  <link rel="canonical" href="https://itermath.jomontolalu.com/practice/polynomials/">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IterMath">
+  <meta property="og:title" content="Polynomials practice · IterMath">
+  <meta property="og:description" content="Add, subtract and multiply polynomials, and expand brackets. Instant feedback and a worked solution for every miss.">
+  <meta property="og:url" content="https://itermath.jomontolalu.com/practice/polynomials/">
+  <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <header class="container container--narrow topbar">
+    <a class="back" href="../../" aria-label="All modules"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><img src="../../assets/itermath-logo.svg" alt="" width="104" height="37"></a>
+  </header>
+
+  <main class="container container--narrow">
+    <div class="practice-header">
+      <p class="eyebrow small muted">Algebra · Grades 9–10</p>
+      <h1 class="h1">Polynomials</h1>
+      <p class="lead">Add, subtract and multiply polynomials, and expand brackets.</p>
+    </div>
+
+    <section class="card panel" aria-label="Exercise">
+      <p id="question" class="question" aria-live="polite"></p>
+      <form id="form" novalidate autocomplete="off">
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <div class="answer-row">
+          <input id="answer" class="input" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="3x^2 - 2x + 5" aria-describedby="hint error">
+          <button id="action" class="btn" type="submit">Check</button>
+        </div>
+        <p id="hint" class="field-hint small muted">Type powers with ^, like 3x^2 - 2x + 5.</p>
+        <p id="error" class="field-error" role="alert" hidden></p>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="../../assets/practice.js"></script>
+  <script>
+    (function (M) {
+      M.practice({
+        input: 'number',
+        generate: function () {
+          var P = M.poly, t = M.rand(1, 5), r = function () { return M.randNZ(-9, 9); }, coeffs, q, rows;
+          if (t <= 2) {
+            var A = [M.randNZ(-5, 5), r(), r()], B = [M.randNZ(-5, 5), r(), r()], s = t === 1 ? 1 : -1;
+            coeffs = [A[0] + s * B[0], A[1] + s * B[1], A[2] + s * B[2]];
+            q = '(' + P(A) + ') ' + (s > 0 ? '+' : '−') + ' (' + P(B) + ')';
+            var negB = P([-B[0], -B[1], -B[2]]);
+            rows = s > 0 ? [[q, '= ' + P(coeffs)]] : [[q, '= ' + P(A) + (negB.charAt(0) === '−' ? ' − ' + negB.slice(1) : ' + ' + negB)], ['', '= ' + P(coeffs)]];
+          } else if (t === 3) {
+            var k = M.randNZ(-6, 6), b = M.randNZ(-6, 6), c = r();
+            coeffs = [k * b, k * c, 0];
+            q = M.terms([[k, M.v('x')]]) + '(' + P([b, c]) + ')';
+            rows = [[q, '= ' + M.terms([[k, M.v('x')]]) + ' · ' + M.terms([[b, M.v('x')]]) + ' + ' + M.terms([[k, M.v('x')]]) + ' · ' + M.operand(c)], ['', '= ' + P(coeffs)]];
+          } else if (t === 4) {
+            var a1 = M.pick([1, 1, 2, 3]), p = r(), a2 = M.pick([1, 1, 2]), qq = r();
+            coeffs = [a1 * a2, a1 * qq + p * a2, p * qq];
+            q = '(' + P([a1, p]) + ')(' + P([a2, qq]) + ')';
+            rows = [[q, '= ' + M.terms([[a1 * a2, M.pow(M.v('x'), 2)], [a1 * qq, M.v('x')], [p * a2, M.v('x')], [p * qq, '']])], ['', '= ' + P(coeffs)]];
+          } else {
+            var h = r();
+            coeffs = [1, 2 * h, h * h];
+            q = M.pow('(' + P([1, h]) + ')', 2);
+            rows = [[q, '= (' + P([1, h]) + ')(' + P([1, h]) + ')'], ['', '= ' + M.terms([[1, M.pow(M.v('x'), 2)], [h, M.v('x')], [h, M.v('x')], [h * h, '']])], ['', '= ' + P(coeffs)]];
+          }
+          rows[rows.length - 1][1] = rows[rows.length - 1][1].replace(/= (.*)$/, '= <strong>$1</strong>');
+          return {
+            prompt: t <= 2 ? 'Simplify.' : 'Expand and simplify.', question: q, ask: false,
+            answer: M.polyText(coeffs), sample: M.polyText(coeffs), check: M.polyCheck(coeffs), display: P(coeffs),
+            solution: M.steps(rows) + M.note(t <= 2 ? 'Combine like terms: ' + M.pow(M.v('x'), 2) + ' with ' + M.pow(M.v('x'), 2) + ', ' + M.v('x') + ' with ' + M.v('x') + ', numbers with numbers.' : 'Multiply every term in the first bracket by every term in the second, then combine like terms.')
+          };
+        }
+      });
+    })(IterMath);
+  </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Exponents practice · IterMath</title>
+  <meta name="description" content="Evaluate powers, including negative bases, zero exponents and negative exponents. Instant feedback and a worked solution for every miss.">
+  <link rel="canonical" href="https://itermath.jomontolalu.com/practice/exponents/">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IterMath">
+  <meta property="og:title" content="Exponents practice · IterMath">
+  <meta property="og:description" content="Evaluate powers, including negative bases, zero exponents and negative exponents. Instant feedback and a worked solution for every miss.">
+  <meta property="og:url" content="https://itermath.jomontolalu.com/practice/exponents/">
+  <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <header class="container container--narrow topbar">
+    <a class="back" href="../../" aria-label="All modules"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><img src="../../assets/itermath-logo.svg" alt="" width="104" height="37"></a>
+  </header>
+
+  <main class="container container--narrow">
+    <div class="practice-header">
+      <p class="eyebrow small muted">Integers, powers and factors · Grades 5–8</p>
+      <h1 class="h1">Exponents</h1>
+      <p class="lead">Evaluate powers, including negative bases, zero exponents and negative exponents.</p>
+    </div>
+
+    <section class="card panel" aria-label="Exercise">
+      <p id="question" class="question" aria-live="polite"></p>
+      <form id="form" novalidate autocomplete="off">
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <div class="answer-row">
+          <input id="answer" class="input" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="Answer" aria-describedby="hint error">
+          <button id="action" class="btn" type="submit">Check</button>
+        </div>
+        <p id="hint" class="field-hint small muted">Fractions are fine, like 1/8.</p>
+        <p id="error" class="field-error" role="alert" hidden></p>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="../../assets/practice.js"></script>
+  <script>
+    (function (M) {
+      M.practice({
+        input: 'number',
+        generate: function () {
+          var n = M.num, t = M.rand(1, 10), b, e, ans;
+          if (t <= 5) {
+            var max = { 2: 10, 3: 6, 4: 5, 5: 4, 6: 3, 7: 3, 8: 3, 9: 3, 10: 6 };
+            b = M.rand(2, 10); e = M.rand(2, max[b]); ans = Math.pow(b, e);
+            var reps = []; for (var i = 0; i < e; i++) reps.push(b);
+            return { question: M.pow(b, e), answer: ans, solution: M.steps([[M.pow(b, e), '= ' + reps.join(' × ')], ['', '= <strong>' + ans + '</strong>']]) };
+          }
+          if (t <= 7) {
+            b = M.rand(2, 5); e = M.rand(2, 4);
+            var reps2 = []; for (var j = 0; j < e; j++) reps2.push('(' + n(-b) + ')');
+            if (Math.random() < .5) {
+              ans = Math.pow(-b, e);
+              return {
+                question: M.pow('(' + n(-b) + ')', e), answer: ans,
+                solution: M.steps([[M.pow('(' + n(-b) + ')', e), '= ' + reps2.join(' × ')], ['', '= <strong>' + n(ans) + '</strong>']]) +
+                  M.note('The bracket means the negative sign is part of the base. ' + (e % 2 ? 'An odd' : 'An even') + ' number of negatives gives a ' + (e % 2 ? 'negative' : 'positive') + ' result.')
+              };
+            }
+            ans = -Math.pow(b, e);
+            return {
+              question: '−' + M.pow(b, e), answer: ans,
+              solution: M.steps([['−' + M.pow(b, e), '= ' + '−' + '(' + M.pow(b, e) + ')'], ['', '= <strong>' + n(ans) + '</strong>']]) +
+                M.note('Without brackets, the exponent applies only to ' + b + '. The minus sign comes after.')
+            };
+          }
+          if (t === 8) {
+            b = M.pick([M.rand(2, 99), -M.rand(2, 20)]);
+            var base = b < 0 ? '(' + n(b) + ')' : String(b);
+            return { question: M.pow(base, 0), answer: 1, solution: M.steps([[M.pow(base, 0), '= <strong>1</strong>']]) + M.note('Any nonzero number to the power 0 is 1.') };
+          }
+          if (t === 9) {
+            b = M.rand(2, 5); e = M.rand(1, b === 2 ? 5 : 3);
+            var den = Math.pow(b, e);
+            return {
+              question: M.pow(b, n(-e)), answer: M.Q(1, den),
+              solution: M.steps([[M.pow(b, n(-e)), '= ' + M.frac(1, M.pow(b, e))], ['', '= <strong>' + M.frac(1, den) + '</strong>']]) +
+                M.note('A negative exponent means one over the positive power.')
+            };
+          }
+          var p = M.rand(1, 5), q = M.rand(p + 1, 7);
+          while (M.gcd(p, q) !== 1) q++;
+          e = M.rand(2, 3);
+          return {
+            question: M.pow('(' + M.frac(p, q) + ')', e), answer: M.Q(Math.pow(p, e), Math.pow(q, e)),
+            solution: M.steps([[M.pow('(' + M.frac(p, q) + ')', e), '= ' + M.frac(M.pow(p, e), M.pow(q, e))], ['', '= <strong>' + M.frac(Math.pow(p, e), Math.pow(q, e)) + '</strong>']]) +
+              M.note('Raise the top and the bottom to the power separately.')
+          };
+        }
+      });
+    })(IterMath);
+  </script>
+</body>
+</html>

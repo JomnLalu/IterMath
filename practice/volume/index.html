@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Volume and surface area practice · IterMath</title>
+  <meta name="description" content="Find the volume and surface area of prisms, cubes, pyramids, cylinders, cones and spheres. Instant feedback and a worked solution for every miss.">
+  <link rel="canonical" href="https://itermath.jomontolalu.com/practice/volume/">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IterMath">
+  <meta property="og:title" content="Volume and surface area practice · IterMath">
+  <meta property="og:description" content="Find the volume and surface area of prisms, cubes, pyramids, cylinders, cones and spheres. Instant feedback and a worked solution for every miss.">
+  <meta property="og:url" content="https://itermath.jomontolalu.com/practice/volume/">
+  <meta property="og:image" content="https://itermath.jomontolalu.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <header class="container container--narrow topbar">
+    <a class="back" href="../../" aria-label="All modules"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><img src="../../assets/itermath-logo.svg" alt="" width="104" height="37"></a>
+  </header>
+
+  <main class="container container--narrow">
+    <div class="practice-header">
+      <p class="eyebrow small muted">Geometry and measurement · Grades 5–8</p>
+      <h1 class="h1">Volume and surface area</h1>
+      <p class="lead">Find the volume and surface area of prisms, cubes, pyramids, cylinders, cones and spheres.</p>
+    </div>
+
+    <section class="card panel" aria-label="Exercise">
+      <p id="question" class="question" aria-live="polite"></p>
+      <form id="form" novalidate autocomplete="off">
+        <label for="answer" class="visually-hidden">Your answer</label>
+        <div class="answer-row">
+          <input id="answer" class="input" type="text" inputmode="decimal" enterkeyhint="done" placeholder="Answer" aria-describedby="hint error">
+          <button id="action" class="btn" type="submit">Check</button>
+        </div>
+        <p id="hint" class="field-hint small muted" hidden></p>
+        <p id="error" class="field-error" role="alert" hidden></p>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="../../assets/practice.js"></script>
+  <script>
+    (function (M) {
+      M.practice({
+        input: 'number',
+        generate: function () {
+          var u = M.pick(['cm', 'm', 'in']), c3 = '<sup>3</sup>', c2 = '<sup>2</sup>', t = M.rand(1, 8);
+          var ask = function (x) { return '= <span class="muted">?</span> ' + x; };
+          var piQ = function (k, unit, prompt, what, rows) {
+            var a = M.round(k * Math.PI, 1), b = M.round(k * 3.14, 1);
+            return {
+              prompt: prompt, question: what, ask: '≈ <span class="muted">?</span> ' + unit, answer: a, sample: String(a),
+              check: M.piCheck(k, 1), hint: 'Round to 1 decimal place. π or 3.14 both count.',
+              display: a + ' ' + unit + (a !== b ? ' (' + b + ' with π ≈ 3.14)' : ''),
+              solution: M.steps(rows.concat([['', '≈ <strong>' + a + ' ' + unit + '</strong>']]))
+            };
+          };
+          var l = M.rand(2, 12), w = M.rand(2, 10), h = M.rand(2, 12), r = M.rand(1, 9);
+          if (t === 1) return { prompt: 'A box is ' + l + ' × ' + w + ' × ' + h + ' ' + u + '.', question: 'Volume', ask: ask(u + c3), answer: l * w * h, display: l * w * h + ' ' + u + c3, hint: '', solution: M.steps([['<i>V</i>', '= <i>lwh</i>'], ['', '= ' + l + ' × ' + w + ' × ' + h + ' = <strong>' + l * w * h + ' ' + u + c3 + '</strong>']]) };
+          if (t === 2) {
+            var sa = 2 * (l * w + l * h + w * h);
+            return { prompt: 'A box is ' + l + ' × ' + w + ' × ' + h + ' ' + u + '.', question: 'Surface area', ask: ask(u + c2), answer: sa, display: sa + ' ' + u + c2, hint: '', solution: M.steps([['<i>SA</i>', '= 2(<i>lw</i> + <i>lh</i> + <i>wh</i>)'], ['', '= 2(' + l * w + ' + ' + l * h + ' + ' + w * h + ')'], ['', '= <strong>' + sa + ' ' + u + c2 + '</strong>']]) };
+          }
+          if (t === 3) {
+            var s = M.rand(2, 12), vol = Math.random() < .5;
+            return { prompt: 'A cube has edges of ' + s + ' ' + u + '.', question: vol ? 'Volume' : 'Surface area', ask: ask(u + (vol ? c3 : c2)), answer: vol ? s * s * s : 6 * s * s, display: (vol ? s * s * s + ' ' + u + c3 : 6 * s * s + ' ' + u + c2), hint: '', solution: M.steps(vol ? [['<i>V</i>', '= ' + M.pow('<i>s</i>', 3)], ['', '= ' + M.pow(s, 3) + ' = <strong>' + s * s * s + ' ' + u + c3 + '</strong>']] : [['<i>SA</i>', '= 6' + M.pow('<i>s</i>', 2)], ['', '= 6 × ' + s * s + ' = <strong>' + 6 * s * s + ' ' + u + c2 + '</strong>']]) };
+          }
+          if (t === 4) {
+            var b = M.rand(2, 12), bh = M.rand(2, 10), len = M.rand(2, 15);
+            if ((b * bh) % 2) bh++;
+            var tv = b * bh / 2 * len;
+            return { prompt: 'A triangular prism has a triangle base ' + b + ' ' + u + ' wide and ' + bh + ' ' + u + ' tall, and is ' + len + ' ' + u + ' long.', question: 'Volume', ask: ask(u + c3), answer: tv, display: tv + ' ' + u + c3, hint: '', solution: M.steps([['<i>V</i>', '= base area × length'], ['', '= (' + M.frac(1, 2) + ' × ' + b + ' × ' + bh + ') × ' + len], ['', '= ' + b * bh / 2 + ' × ' + len + ' = <strong>' + tv + ' ' + u + c3 + '</strong>']]) };
+          }
+          if (t === 5) {
+            var side = M.rand(2, 12), ph;
+            do { ph = M.rand(2, 15); } while ((side * side * ph) % 3);
+            var pv = side * side * ph / 3;
+            return { prompt: 'A square pyramid has a base of side ' + side + ' ' + u + ' and a height of ' + ph + ' ' + u + '.', question: 'Volume', ask: ask(u + c3), answer: pv, display: pv + ' ' + u + c3, hint: '', solution: M.steps([['<i>V</i>', '= ' + M.frac(1, 3) + ' × base area × height'], ['', '= ' + M.frac(1, 3) + ' × ' + side * side + ' × ' + ph], ['', '= <strong>' + pv + ' ' + u + c3 + '</strong>']]) };
+          }
+          if (t === 6) return piQ(r * r * h, u + c3, 'A cylinder has radius ' + r + ' ' + u + ' and height ' + h + ' ' + u + '.', 'Volume', [['<i>V</i>', '= π' + M.pow('<i>r</i>', 2) + '<i>h</i>'], ['', '= π × ' + r * r + ' × ' + h]]);
+          if (t === 7) return piQ(r * r * h / 3, u + c3, 'A cone has radius ' + r + ' ' + u + ' and height ' + h + ' ' + u + '.', 'Volume', [['<i>V</i>', '= ' + M.frac(1, 3) + 'π' + M.pow('<i>r</i>', 2) + '<i>h</i>'], ['', '= ' + M.frac(1, 3) + ' × π × ' + r * r + ' × ' + h]]);
+          return piQ(4 * r * r * r / 3, u + c3, 'A sphere has radius ' + r + ' ' + u + '.', 'Volume', [['<i>V</i>', '= ' + M.frac(4, 3) + 'π' + M.pow('<i>r</i>', 3)], ['', '= ' + M.frac(4, 3) + ' × π × ' + r * r * r]]);
+        }
+      });
+    })(IterMath);
+  </script>
+</body>
+</html>
